@@ -1,0 +1,63 @@
+// Navigation Bar
+header#topnav
+    .topbar-main
+        .container
+            // LOGO
+            .topbar-left
+                a.logo(href='/')
+                    i.fa.fa-home
+                    //- span
+                    //-     img.img-responsive(src="/img/logo_part.png", style="max-height: 30px;", alt='HustleMania')
+            // End Logo container
+            .menu-extras
+                ul.nav.navbar-nav.navbar-right.pull-left
+                    li.dropdown.user-box
+                        a.dropdown-toggle.waves-effect.waves-light.profile(href='', data-toggle='dropdown', aria-expanded='true')
+                            span.visible-xs.hide
+                .menu-item
+                    // Mobile menu toggle
+                    a.navbar-toggle
+                        .lines
+                            span
+                            span
+                            span
+                    // End mobile menu toggle
+    .navbar-custom
+        .container
+            #navigation
+                ul.navigation-menu
+                    li
+                        a(href="#") Logged in as #{req.session.userDetails.email}
+                    li#menu-dashboard
+                        a(href='/dashboard')
+                            i.md.md-home
+                            span     Home
+                    li#menu-transfer-token
+                        a(href='/token/transfer')
+                            i.md.md-swap-horiz
+                            span     Transfer Tokens
+                    li#menu-transaction
+                        a(href='/token/transactions')
+                            i.md.md-credit-card
+                            span     Transactions
+                    li#menu-past-bids
+                        a(href='/bid/list')
+                            i.md.md-list
+                            span     Past Bids
+                    li#menu-user-settings
+                        a(href='/user/settings')
+                            i.md.md-settings
+                            |    User Settings
+                    li#menu-logout
+                        a(href='/logout')
+                            i.md.md-settings-power
+                            |    Logout
+                // End navigation menu
+        // End Navigation Bar
+
+        script.
+            $(document).ready(
+                function()
+                {
+                    //- loadNotifications("header");
+                });

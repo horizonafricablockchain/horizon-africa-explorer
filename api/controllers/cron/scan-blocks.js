@@ -1,8 +1,7 @@
 module.exports = {
     friendlyName: "Scans blocks and retrieves details to store in database",
     description: "Scans blocks and retrieves details to store in database",
-    inputs: {
-    },
+    inputs: {},
     exits: {
         jsonError: {
             responseType: "jsonError"
@@ -27,10 +26,16 @@ module.exports = {
                 await BlockTracker.update({
                     type: "ETH"
                 }, {
-                        block_number: blocksToScan.endBlockNumber,
-                        eth_current_block: blocksToScan.currentBlock
-                    });
+                    block_number: blocksToScan.endBlockNumber,
+                    eth_current_block: blocksToScan.currentBlock
+                });
             }
+        } else {
+            await BlockTracker.create({
+                type: BlockTracker.constants.type.eth,
+                block_number: blocksToScan.endBlockNumber,
+                eth_current_block: blocksToScan.currentBlock
+            });
         }
 
         return exits.success({

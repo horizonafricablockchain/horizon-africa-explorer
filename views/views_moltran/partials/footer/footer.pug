@@ -1,0 +1,35 @@
+//- 2015 © Moltran.
+.container
+    .row
+        .col-xs-12.col-md-6
+            ul.list-unstyled
+                li.m-b-5
+                    i.footer-icon.fa.fa-map-marker
+                    | #{sails.config.appsettings.company_address}
+
+                li.m-b-5
+                    i.footer-icon.fa.fa-mobile
+                    | #{sails.config.appsettings.comapany_phone}
+                li.m-b-10
+                    i.footer-icon.fa.fa-paper-plane-o
+                    | #{sails.config.appsettings.company_email}
+                li
+                    span.text-muted
+                        |#{sails.config.appsettings.company_copyright}
+                    a(href='#')
+                        | &nbsp; Terms and Policies
+
+        .col-xs-12.col-md-6.hide
+            .pull-right
+                ul.list-inline.m-b-0
+                    li
+                        a(href='#')
+                            i.footer-icon-big.fa.fa-facebook-square
+
+                    li
+                        a(href='#')
+                            i.footer-icon-big.fa.fa-twitter
+                    li
+                        a(href='#')
+                            i.footer-icon-big.fa.fa-twitter
+// End Footer

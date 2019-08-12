@@ -1,0 +1,6 @@
+if(error.length > 0)
+    .col-md-12
+        .alert.alert-danger
+            ul
+                each erroritem in error
+                    li #{erroritem.message}

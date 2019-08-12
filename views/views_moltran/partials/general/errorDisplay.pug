@@ -1,0 +1,7 @@
+if((error != undefined))
+    if(error.length > 0)
+        div.alert.alert-danger
+            |Error(s)
+            ul
+                each errorString in error
+                    li #{errorString.message}

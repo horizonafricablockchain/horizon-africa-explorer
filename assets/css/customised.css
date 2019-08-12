@@ -1,0 +1,112 @@
+/**FONT**/
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+
+.margin-bottom-20 {
+  margin-bottom:20px;
+}
+
+.margin-top-20 {
+  margin-top:20px;
+}
+
+
+.timer-figure {
+    width: 50px;
+    border: none;
+    font-size: 40px;
+    color: red;
+}
+
+.timer-column {
+    font-size: 50px;
+    color: black;
+}
+
+.buyer-timer-figure {
+    width: 280px;
+    border: none;
+    font-size: 250px;
+    color: black;
+}
+
+.buyer-timer-column {
+    font-size: 280px;
+    color: black;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    background-color: #404040 !important;
+    border: 1px solid #5e35b1 !important;
+}
+
+.btn-info, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
+    background-color: #808080 !important;
+    border: 1px solid #808080 !important;
+}
+
+.login-page .bg-img {
+    background-image: url(../../images/hustlemania-logo.png?v=1);
+    background-size: contain!important;
+    padding: 25px;
+    background-color: transparent!important;
+    height: 200px;
+    background-repeat: no-repeat!important;
+    background-color: #ee1d24!important;
+}
+
+.login-page .panel-pages .panel-body {
+    padding: 60px 30px!important;
+}
+
+    
+.login-page .panel-pages .panel-body h4 {
+    margin-bottom: 27px!important;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+}
+
+.signup-page .panel-pages .panel-body h4 {
+    margin-bottom: 27px!important;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-primary, .btn-info {
+    font-family: 'Roboto Condensed', sans-serif!important;
+}
+
+button#facebook_login_button {
+    background-color: #4267b2!important;
+    border: 1px solid #4267b2!important;
+    margin-bottom: 20px;
+}
+
+.login-page .form-group p {
+    text-align: center!important;
+}
+
+button#btn-user-login {
+    margin-top: 20px!important;
+    margin-bottom: 20px!important;
+}
+
+.m-t-30 {
+    margin-top: 19px !important;
+}
+
+.login-page .form-group p a {
+    font-weight: 600;
+    color: #404040;
+}
+
+button#btn-email-signup {
+    margin-top: -20px!important;
+}
+
+p.text-muted a {
+    color: #404040;
+    font-weight: 600;
+}

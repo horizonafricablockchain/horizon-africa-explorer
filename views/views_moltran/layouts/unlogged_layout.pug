@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        include ../partials/header/header.pug
+    body
+        input#txt_socket_url(type="hidden", value=sails.config.appsettings.sockets.url)
+        .wrapper-page
+            .m-b-200
+                // ======== @Region: #content ========
+                block content
+                include ../partials/general/modal.pug
+
+            // Footer
+            //- footer.footer.unlogged-footer
+            //-     include ../partials/footer/footer.pug
+        // end container
+    //- footer script
+    include ../partials/footer/footer_script.pug

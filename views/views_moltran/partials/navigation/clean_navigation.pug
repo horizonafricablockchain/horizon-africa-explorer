@@ -1,0 +1,32 @@
+header#topnav
+    .topbar-main
+        .container
+            .topbar-left
+                a.logo(href="/")
+                    span #{sails.config.appsettings.application_name}
+            .menu-extras
+                ul.nav.navbar-nav.navbar-right.pull-right
+                    li.dropdown.user-box
+                        a.dropdown-toggle.waves-effect.waves-light.profile(href="", data-toggle="dropdown", aria-expanded="true")
+                            span.span.hidden-xs
+                                | &nbsp;
+                .menu-item
+                    // Mobile menu toggle
+                    a.navbar-toggle
+                        .lines
+                            span
+                            span
+                            span
+    .navbar-custom
+        .container
+            #navigation
+                ul.navigation-menu
+                    //Dashboard
+                    li#menu-graph
+                        a(href="/")
+                            i.fa.fa-line-chart
+                            span Home
+
+        script.
+            $(document).ready(function() {
+                });

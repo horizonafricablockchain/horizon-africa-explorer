@@ -1,0 +1,58 @@
+.report-title {
+    font-family: Cambria, "Times New Roman", Georgia, Serif;
+    font-size: 18px;
+    color: #17365d;
+}
+
+.report-section {
+    font-family: Cambria, "Times New Roman", Georgia, Serif;
+    font-size: 10px;
+    color: #366091;
+}
+
+.report-sub-section {
+    font-family: Cambria, "Times New Roman", Georgia, Serif;
+    font-size: 9px;
+    color: #4f81bd;
+}
+
+.report-header {
+    font-family: Calibri, "Times New Roman", Georgia, Serif !important;
+    font-size: 7px !important;
+    color: #17365d !important;
+}
+
+p {
+    font-size: 7px;
+}
+
+h6 {
+    margin-bottom: 0px;
+}
+
+#pageHeader {
+    font-size: 7px;
+}
+
+#pageFooter {
+    font-size: 7px;
+}
+
+table.table {
+    width: 100%;
+    border-spacing: 1px;
+}
+
+table.table td,
+th {
+    font-size: 7px;
+    text-align: left;
+}
+
+table.table th {
+    background-color: #a1d9ef;
+}
+
+table.table td {
+    background-color: #e7f5fb;
+}

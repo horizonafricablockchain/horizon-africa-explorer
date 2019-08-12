@@ -1,0 +1,334 @@
+.fix-height {
+  height: 50px !important;
+}
+.dasboard-docs {
+  height: 80px !important;
+  background-color: #f5f5f5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dashboard-data {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.rounded-corner{
+  border-radius: 5px !important;
+}
+.grid-view-details{
+    width: 100%;
+    overflow: hidden;
+    height: 20px
+}
+.form-divider {
+position: relative;
+border: 2px solid #f0f0f0;
+margin-bottom: 30px;
+/*margin-top: 30px; */
+}
+.custom-dropzone{
+  border-radius: 0px !important;
+  min-height:296px !important;
+}
+
+.dropzone-wrapper{
+  /*border: 2px solid rgba(0, 0, 0, 0.3);*/
+  border : 2px dashed rgba(0, 0, 0, 0.3);
+}
+
+.doc_added_line
+{
+  border-top: double 5px gray;
+  padding-top: 10px;
+  /*margin-top: 10px;*/
+  padding-bottom: 10px;
+  /*margin-bottom: 10px;*/
+}
+
+.sub-heading
+{
+  color:#6e8cd7;
+}
+
+.radio-form-control {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.icon-primary
+{
+  color: #6e8cd7;
+  /*font-size: 18px;*/
+}
+
+.icon-danger
+{
+  color: #ef5350;
+}
+
+table.fix-column-size td,th
+{
+  max-width: 100px;
+  overflow: hidden;
+}
+.full-width
+{
+  width:100%;
+}
+
+textarea.general
+{
+  height: 200px;
+}
+
+textarea.general-smaller
+{
+  height: 120px;
+}
+
+.left-aligned
+{
+  text-align: left;
+}
+
+.fix-width:
+{
+  max-width: 100px;
+  overflow: hidden;
+}
+
+.custom-width:
+{
+  width: 3px;
+  overflow: hidden;
+}
+
+/*NOTIFICATIONS*/
+.notification-description
+{
+  font-size: 12px;
+}
+
+.notification-description span
+{
+  text-transform: lowercase;
+}
+
+.margin-top-20
+{
+  margin-top: 20px;
+}
+
+.margin-top-40
+{
+  margin-top: 40px;
+}
+.margin-top-25
+{
+ margin-top: 25px;
+}
+
+.no-padding-right
+{
+  padding-right: 0px;
+}
+.padding-20
+{
+  /*text-align: center;*/
+  padding-top:20px;
+  padding-bottom:20px
+}
+.form-control-feeback-right
+{
+  right: 15px;
+}
+.sa-input-error
+{
+  margin-top: -5px;
+}
+.padding-top-5
+{
+  padding-top: 5px;
+}
+
+.form-control-height{
+  height: 34px;
+}
+
+.left-border{
+  border-left: solid thin lightgray;
+}
+
+.align-center{
+  text-align:center;
+}
+
+.right-align{
+  text-align:right;
+}
+
+.bold{
+  font-weight: bold;
+}
+.dropzone-note{
+  font-size: 0.5em;
+  font-weight: 200;
+  display: block;
+  margin-top: 1.4rem;
+}
+
+.margin-inline-check-boxes {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ /* NAVIGATION */
+ .pagination-bar {
+  margin: 10px 0px;
+ }
+ /* END OF NAVIGATION */
+
+
+
+
+  /* LOGS */
+  .log-details-table th:nth-child(1){
+    width: 20%;
+  }
+
+  .log-details-table th:nth-child(2){
+    width: 20%;
+  }
+
+  .log-details-table th:nth-child(3){
+    width: 20%;
+  }
+
+  .log-details-table th:nth-child(4){
+    width: 10%;
+  }
+
+  .log-details-table th:nth-child(5){
+    width: 30%;
+  }
+ /* END OF LOGS */
+
+
+
+
+
+ /* GENERAL */
+.dropdown-table {
+  margin-bottom: 100px;
+}
+
+.dropdown-table td{
+  overflow: visible;
+}
+
+/* END OF GENERAL */
+
+@media (max-width: 768px)
+{
+    #categories_menu
+    {
+        position: static !important;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .is-sticky #categories_menu
+    {
+        top: 70px !important;
+    }
+}
+
+@media (min-width: 992px)
+{
+    .is-sticky #categories_menu
+    {
+        top: 135px !important;
+    }
+}
+
+
+
+/* BRANCH */
+.sweet-alert .alert.alert-danger {
+  text-align: left;
+}
+/* END OF BRANCH */
+
+/* ARCHIVE BOX */
+.archive-box-ref-list-con {
+  height: 300px;
+  overflow-y: auto;
+}
+/* END OF ARCHIVE BOX */
+
+
+
+/* DASHBOARD */
+.dashboard-con .panel-primary {
+  height: 370px;
+}
+
+.dashboard-con .panel-primary .title-button {
+  margin-top: 10px;
+}
+/* END OF DASHBOARD */
+
+
+
+/* PROFILE SCREEN */
+.plugin-table td:first-child{
+  width: 70%;
+}
+
+.plugin-table td:nth-child(2){
+  width: 30%;
+}
+/* END OF PROFILE SCREEN */
+
+
+
+
+/* GENERAL */
+.dropdown-table {
+  margin-bottom: 100px;
+}
+
+.dropdown-table td{
+  overflow: visible;
+}
+
+.panel .pull-right .btn-group {
+  margin-right: 15px;
+}
+/* CSS REQUIRED */
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+/* DEMO ONLY - REMOVES UNWANTED MARGIN */
+.well .list-group {
+    margin-bottom: 0px;
+}
+/* END OF GENERAL */
+
+/* MENU */
+/* overwrite menu css to display all sub-menus to the right even if it is the last menu item on the navigation bar*/
+#topnav .navigation-menu > li.last-elements .submenu > li.has-submenu .submenu {
+  left: 100%;
+  margin-left: 10px;
+}
+/* END OF MENU */
+.report-sub-section {
+    font-family: Cambria, "Times New Roman", Georgia, Serif;
+    /*font-size: 9px;*/
+    color: #4f81bd;
+}

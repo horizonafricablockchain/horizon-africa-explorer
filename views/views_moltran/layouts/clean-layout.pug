@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        include ../partials/header/header.pug
+    body
+        input#txt_socket_url(type="hidden", value=sails.config.appsettings.sockets.url)
+        include ../partials/navigation/clean_navigation.pug
+
+        .wrapper
+            .container
+                block content
+                include ../partials/general/modal.pug
+                //- include ../partials/footer/footer.pug
+        include ../partials/footer/footer_script.pug
+
+        block footer_script

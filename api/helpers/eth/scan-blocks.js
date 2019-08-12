@@ -22,7 +22,8 @@ module.exports = {
             blockArray = [],
             transactionArray = [],
             blockDetails,
-            tokens = await Token.find();
+            tokens = await Token.find(),
+            blockRecord = {};
 
         for (var i = inputs.start; i <= inputs.end; i++) {
             blockNumberArray.push(i);
@@ -38,11 +39,28 @@ module.exports = {
                     });
                 }
 
-                blockDetails.data.hash_lower = blockDetails.data.hash.toLowerCase();
-                blockDetails.data.parentHash_lower = blockDetails.data.parentHash.toLowerCase();
-                delete blockDetails.data.transactions;
+                blockRecord = {
+                    author: blockDetails.data.author,
+                    difficulty: blockDetails.data.difficulty,
+                    extraData: blockDetails.data.extraData,
+                    gasLimit: blockDetails.data.gasLimit,
+                    gasUsed: blockDetails.data.gasUsed,
+                    hash: blockDetails.data.hash,
+                    hash_lower: blockDetails.data.hash.toLowerCase(),
+                    miner: blockDetails.data.miner,
+                    number: blockDetails.data.number,
+                    parentHash: blockDetails.data.parentHash,
+                    parentHash_lower: blockDetails.data.parentHash.toLowerCase(),
+                    receiptsRoot: blockDetails.data.receiptsRoot,
+                    sha3Uncles: blockDetails.data.sha3Uncles,
+                    size: blockDetails.data.size,
+                    stateRoot: blockDetails.data.stateRoot,
+                    timestamp: blockDetails.data.timestamp,
+                    totalDifficulty: blockDetails.data.totalDifficulty,
+                    transactionsRoot: blockDetails.data.transactionsRoot
+                }
 
-                blockArray.push(blockDetails.data);
+                blockArray.push(blockRecord);
             }
         }
 

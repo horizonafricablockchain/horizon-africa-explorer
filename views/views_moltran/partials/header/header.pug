@@ -1,0 +1,39 @@
+meta(charset="utf-8")
+meta(http-equiv="X-UA-Compatible" content="IE=edge")
+meta(name="viewport" content="width=device-width,initial-scale=1")
+meta(name="description" content="")
+meta(name="author" content="")
+
+link(rel="icon" href="../images/favicon.png")
+title #{sails.config.appsettings.application_name}
+
+link(href= sails.config.appsettings.application_assets_url + "/css/bootstrap.min.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/core.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/icons.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/components.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/pages.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/menu.css" rel="stylesheet" type="text/css")
+link(href= sails.config.appsettings.application_assets_url + "/css/responsive.css" rel="stylesheet" type="text/css")
+
+script(src=sails.config.appsettings.application_assets_url +"/js/modernizr.min.js")
+
+//- sweet alert added
+link(href=sails.config.appsettings.application_assets_url + "/plugins/sweetalert/dist/sweetalert.css", rel="stylesheet", type="text/css")
+
+//-jQuery - added from footer
+script(src=sails.config.appsettings.application_assets_url + "/js/jquery.min.js")
+
+//-customised css
+link(href=  sails.config.appsettings.application_url + "css/customised.css?v=" + sails.config.appsettings.application_version rel="stylesheet" type="text/css")
+link(href=  sails.config.appsettings.application_url + "styles/importer.css?v=" + sails.config.appsettings.application_version rel="stylesheet" type="text/css")
+
+//- moment js
+script(src= sails.config.appsettings.application_url + "js/moment.min.js")
+
+//- custom functions
+script(src= sails.config.appsettings.application_url + "js/functions.js?v=" + sails.config.appsettings.application_version)
+script(src= sails.config.appsettings.application_url + "js/locale/en.js?v=" + sails.config.appsettings.application_version)
+
+//- ajax
+script(src=sails.config.appsettings.application_url + "js/ajax.js?v=" + sails.config.appsettings.application_version)
+script(src="https://apis.google.com/js/platform.js")

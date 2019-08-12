@@ -21,7 +21,7 @@ module.exports = {
         var blockDetails = await sails.helpers.utilities.apiUtility("/block/get-block", "POST", {
             block_number: inputs.blockNumber,
             full_object: true
-        }, node, sails.i18n);
+        });
 
         return exits.success(blockDetails);
     }

@@ -34,29 +34,25 @@ module.exports = {
                 transaction.to_lower = "";
             }
 
-            // if (_.findIndex(tokenList, {
-            //         address: transaction.to_lower
-            //     }) != -1) {
-                block = _.find(blockArray, {
-                    hash_lower: transaction.blockHash.toLowerCase()
-                });
+            block = _.find(blockArray, {
+                hash_lower: transaction.blockHash.toLowerCase()
+            });
 
-                if (block) {
-                    transaction.eth_block = block.id;
-                    transaction.blockTimestamp = block.timestamp
-                }
+            if (block) {
+                transaction.eth_block = block.id;
+                transaction.blockTimestamp = block.timestamp
+            }
 
-                transaction.hash_lower = transaction.hash.toLowerCase();
-                transaction.blockHash_lower = transaction.blockHash.toLowerCase();
-                transaction.from_lower = transaction.from.toLowerCase();
+            transaction.hash_lower = transaction.hash.toLowerCase();
+            transaction.blockHash_lower = transaction.blockHash.toLowerCase();
+            transaction.from_lower = transaction.from.toLowerCase();
 
-                sails.log.debug("extract-transactions.js (Line: 52) : adding transaction with hash: " + transaction.hash);//debug
+            sails.log.debug("extract-transactions.js (Line: 52) : adding transaction with hash: " + transaction.hash); //debug
 
-                transactionToCreateArray.push(transaction);
-            // }
+            transactionToCreateArray.push(transaction);
         });
 
-        if(transactionToCreateArray.length > 0) {
+        if (transactionToCreateArray.length > 0) {
             await EthTransaction.createEach(transactionToCreateArray);
         }
 

@@ -1,0 +1,64 @@
+extends ../../views_moltran/layouts/clean-layout
+block content
+    .row
+        .col-md-6.col-sm-6.col-lg-3
+            .mini-stat.clearfix.bx-shadow.bg-info
+                span.mini-stat-icon
+                    i.ion-filing
+                .mini-stat-info.text-right
+                    span.counter #{block_tracker.eth_current_block}
+                    | Blocks Mined
+                .tiles-progress
+                    .m-t-20
+                        h5.text-uppercase.text-white.m-0 
+                            span.pull-right Synced up to Block ##{block_tracker.block_number}
+        .col-md-6.col-sm-6.col-lg-3
+            .mini-stat.clearfix.bx-shadow.bg-info
+                span.mini-stat-icon
+                    i.ion-arrow-graph-up-right
+                .mini-stat-info.text-right
+                    span.counter #{transaction_count}
+                    | Transactions
+                .tiles-progress
+                    .m-t-20
+                        h5.text-uppercase.text-white.m-0 
+                            span.pull-right Total Transactions
+    .row
+        .col-md-12
+            .panel.panel-color.panel-primary
+                .panel-heading
+                    h3.panel-title Last 5 Blocks
+                .panel-body
+                    .row
+                        each block in latest_block_list
+                            .col-md-3
+                                .panel.panel-color.panel-info
+                                    .panel-heading
+                                        h3.panel-title Block Number: #{block.number}
+                                    .panel-body
+                                        if(block.number_transactions > 1)
+                                            p #{block.number_transactions} transactions
+                                        else
+                                            p #{block.number_transactions} transaction
+                                        p Validator&nbsp;
+                                            if(block.validator)
+                                                | #{block.validator.name}
+                                            else
+                                                | #{block.miner}
+
+        .col-md-12
+            .panel.panel-color.panel-primary
+                .panel-heading
+                    h3.panel-title Latest Transactions
+                .panel-body
+                    .row
+                        each transaction in latest_transaction_list
+                            ul.list-group
+                                li.list-group-item
+                                    p Transaction hash:&nbsp;
+                                        span.label.label-primary #{transaction.hash}
+                                    p
+                                        span.label.label-primary #{transaction.from}
+                                        | &nbsp;->&nbsp;
+                                        span.label.label-primary #{transaction.to}
+                                    p Block #{transaction.eth_block.number}
