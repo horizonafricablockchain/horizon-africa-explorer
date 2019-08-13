@@ -41,7 +41,7 @@ block content
                                         else
                                             p #{block.number_transactions} transaction
                                         p Validator&nbsp;
-                                            if(block.validator)
+                                            if(block.validator && block.validator.name)
                                                 a(href=block.validator.url, target="_blank") #{block.validator.name}
                                             else
                                                 | #{block.miner}
