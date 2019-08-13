@@ -11,6 +11,9 @@ module.exports = {
         },
         address: {
             type: "string"
+        },
+        url: {
+            type: "string"
         }
     }
 };
