@@ -7,7 +7,9 @@ module.exports = {
     fn: async function(inputs, exits) {
         var currentBlockObject = null,
             currentBlock = 0,
-            blockTrackerFound = null,
+            blockTrackerFound = await BlockTracker.findOne({
+                type: "ETH"
+            }),
             startBlockNumber = 0,
             difference = 0,
             endBlockNumber = 0;
@@ -16,9 +18,6 @@ module.exports = {
 
         if (currentBlockObject && currentBlockObject.data && currentBlockObject.data.block_number) {
             currentBlock = currentBlockObject.data.block_number
-            blockTrackerFound = await BlockTracker.findOne({
-                type: "ETH"
-            });
 
             if (blockTrackerFound) {
                 startBlockNumber = blockTrackerFound.block_number + 1;
