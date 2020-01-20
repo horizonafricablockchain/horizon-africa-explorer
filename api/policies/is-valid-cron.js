@@ -13,6 +13,7 @@ module.exports = async function (req, res, proceed) {
         }
     }
 
-    error.push(await sails.helpers.utility.error.getAppError("general.forbidden_error"));
+    error.push("Forbidden");
+    
     return res.jsonError(error);
 };
