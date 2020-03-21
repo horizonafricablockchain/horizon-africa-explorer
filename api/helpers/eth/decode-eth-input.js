@@ -37,14 +37,14 @@ module.exports = {
             };
 
         if (inputs.token.token_type == Token.constants.token_type.erc20) {
-            decoder = new InputDataDecoder(sails.config.custom.abi.token.erc20)
+            decoder = new InputDataDecoder(sails.config.smart_contract_config.abi.token.erc20)
         }
 
         if (decoder) {
             result = decoder.decodeData(inputs.transaction.input);
 
-            if (result && result.name) {
-                tokenTransaction.transactionName = result.name;
+            if (result && result.method) {
+                tokenTransaction.transactionName = result.method;
             }
 
             if (tokenTransaction.transactionName == TokenTransaction.constants.transactionName.transfer) {

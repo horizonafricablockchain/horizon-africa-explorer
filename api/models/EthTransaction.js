@@ -69,7 +69,7 @@ module.exports = {
         },
         parsed_status: {
             type: "string",
-            isIn: ["not_parsed", "parsed", "error_parsing"],
+            isIn: ["not_parsed", "parsed", "error_parsing", "parsing"],
             defaultsTo: "not_parsed"
         }
     },
@@ -77,7 +77,8 @@ module.exports = {
         parsed_status: {
             not_parsed: "not_parsed",
             parsed: "parsed",
-            error_parsing: "error_parsing"
+            error_parsing: "error_parsing",
+            parsing: "parsing"
         }
     }
 };
