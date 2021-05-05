@@ -14,7 +14,7 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
-        var tokenResponse = await sails.helpers.utilities.apiUtility("/api/v1/token/list", "POST", {
+        var tokenResponse = await sails.helpers.utilities.haApiUtility("/api/v1/token/list", "POST", {
                 search_criteria: {
                     address: inputs.address.toLowerCase()
                 }

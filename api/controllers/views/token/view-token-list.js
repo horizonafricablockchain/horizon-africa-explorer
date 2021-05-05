@@ -9,7 +9,7 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
-        var tokenListResponse = await sails.helpers.utilities.apiUtility("/api/v1/token/list", "POST", {
+        var tokenListResponse = await sails.helpers.utilities.haApiUtility("/api/v1/token/list", "POST", {
                 sort: [{
                     name: "ASC"
                 }]
