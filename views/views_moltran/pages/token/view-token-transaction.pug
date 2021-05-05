@@ -2,26 +2,51 @@ extends ../../../views_moltran/layouts/clean-layout
 block content
     .transaction-page
         if(token)
-            h3 Transactions for Token #{token.name}
-            table.table.table-striped
-                thead
-                    tr
-                        th Txn Hash
-                        th Block
-                        th From
-                        th To
-                        th Value
-                tbody
-                    each transaction in transaction_list
+            .row
+                .col-md-6.col-sm-6.col-lg-3
+                    .mini-stat.clearfix.bx-shadow.bg-info
+                        span.mini-stat-icon
+                            i.ion-filing
+                        .mini-stat-info.text-right
+                            span.counter #{token.code}
+                            | #{token.name}
+                        .tiles-progress
+                            .m-t-20
+                                h5.text-uppercase.text-white.m-0 
+                                    span.pull-right Total Suppply:&nbsp;
+                                        span.format-number #{token.total_supply}
+                //- .col-md-6.col-sm-6.col-lg-3
+                    .mini-stat.clearfix.bx-shadow.bg-info
+                        span.mini-stat-icon
+                            i.ion-arrow-graph-up-right
+                        .mini-stat-info.text-right
+                            span.counter #{transaction_count}
+                            | Transactions
+                        .tiles-progress
+                            .m-t-20
+                                h5.text-uppercase.text-white.m-0 
+                                    span.pull-right Total Transactions
+            .row
+                h3 Transactions for #{token.code}
+                table.table.table-striped
+                    thead
                         tr
-                            td.address
-                                a(href="/transaction/" + transaction.transaction_hash) #{transaction.transaction_hash}
-                            td.address
-                                a(href="/block/" + transaction.block_number) #{transaction.block_number}
-                            td.address
-                                a(href="/address/" + transaction.fromAddress) #{transaction.fromAddress}
-                            td.address
-                                a(href="/address/" + transaction.toAddress) #{transaction.toAddress}
-                            td #{transaction.amountTokens_absolute}
+                            th Txn Hash
+                            th Block
+                            th From
+                            th To
+                            th Value
+                    tbody
+                        each transaction in transaction_list
+                            tr
+                                td.address
+                                    a(href="/transaction/" + transaction.transaction_hash) #{transaction.transaction_hash}
+                                td.address
+                                    a(href="/block/" + transaction.block_number) #{transaction.block_number}
+                                td.address
+                                    a(href="/address/" + transaction.fromAddress) #{transaction.fromAddress}
+                                td.address
+                                    a(href="/address/" + transaction.toAddress) #{transaction.toAddress}
+                                td #{transaction.amountTokens_absolute}
         else
             .alert.alert-info Token was not found
