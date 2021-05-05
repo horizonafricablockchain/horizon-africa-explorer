@@ -27,7 +27,8 @@ block content
                         li.list-group-item
                             .row
                                 .col-md-2 To
-                                .col-md-10 #{transaction.to}
+                                .col-md-10
+                                    a(href="/address/" + transaction.to) #{transaction.to}
                         li.list-group-item
                             .row
                                 .col-md-2 Value
