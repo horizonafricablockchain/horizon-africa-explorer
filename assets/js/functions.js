@@ -28,8 +28,39 @@ function initBuns() {
 $(document).ready(
     function() {
         init();
+        formatDateLabel();
+        formatDateDifferenceLabel();
+        formatTimestampLabel();
+        formatTimestampDifferenceLabel();
+        formatNumber();
+        formatHabx();
     });
 
+function formatNumber() {
+    var elements = $(".format-number"),
+        initialValue = "",
+        formattedDate = "";
+
+    for (var i = 0; i < elements.length; i++) {
+        initialValue = $(elements[i]).html();
+        formattedDate = formatNumberWithCommas(initialValue);
+
+        $(elements[i]).html(formattedDate);
+    }
+}
+
+function formatHabx() {
+    var elements = $(".format-habx"),
+        initialValue = "",
+        formattedDate = "";
+
+    for (var i = 0; i < elements.length; i++) {
+        initialValue = $(elements[i]).html();
+        formattedDate = parseFloat(initialValue) / (Math.pow(10, 18));
+
+        $(elements[i]).html(formattedDate);
+    }
+}
 
 function displayInfoMessage(infoMsg) {
     var infoElement = "<div class='alert alert-info'>";
@@ -37,6 +68,19 @@ function displayInfoMessage(infoMsg) {
     infoElement += "</div>";
 
     return infoElement;
+}
+
+function formatTimestampLabel() {
+    var elements = $(".timestamp-label"),
+        initialValue = "",
+        formattedDate = "";
+
+    for (var i = 0; i < elements.length; i++) {
+        initialValue = $(elements[i]).html();
+        formattedDate = moment(parseInt(initialValue) * 1000).format("DD/MM/YYYY HH:mm");
+
+        $(elements[i]).html(formattedDate);
+    }
 }
 
 function formatDateLabel() {
@@ -47,6 +91,32 @@ function formatDateLabel() {
     for (var i = 0; i < elements.length; i++) {
         initialValue = $(elements[i]).html();
         formattedDate = moment(parseInt(initialValue)).format("DD/MM/YYYY HH:mm");
+
+        $(elements[i]).html(formattedDate);
+    }
+}
+
+function formatDateDifferenceLabel() {
+    var elements = $(".date-diff"),
+        initialValue = "",
+        formattedDate = "";
+
+    for (var i = 0; i < elements.length; i++) {
+        initialValue = $(elements[i]).html();
+        formattedDate = moment(parseInt(initialValue)).fromNow();
+
+        $(elements[i]).html(formattedDate);
+    }
+}
+
+function formatTimestampDifferenceLabel() {
+    var elements = $(".timestamp-diff"),
+        initialValue = "",
+        formattedDate = "";
+
+    for (var i = 0; i < elements.length; i++) {
+        initialValue = $(elements[i]).html();
+        formattedDate = moment(parseInt(initialValue) * 1000).fromNow();
 
         $(elements[i]).html(formattedDate);
     }
@@ -77,228 +147,232 @@ function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-function formatBidDates() {
-    var dateElements = $(".format-date"),
-        formattedDate = "",
-        dateItem = "";
-
-    for (var i = 0; i < dateElements.length; i++) {
-        dateItem = parseFloat($(dateElements[i]).html()) / 1000;
-        formattedDate = moment.unix(dateItem).format("DD/MM/YYYY HH:mm");
-
-        $(dateElements[i]).html(formattedDate);
-    }
+function formatNumberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-jQuery(document).ready(function($) {
-    initGoogleLogin();
-    initFacebookLogin();
+// function formatBidDates() {
+//     var dateElements = $(".format-date"),
+//         formattedDate = "",
+//         dateItem = "";
 
-    function initGoogleLogin() {
-        var googleUser = {},
-            params = {},
-            auth2 = null;
+//     for (var i = 0; i < dateElements.length; i++) {
+//         dateItem = parseFloat($(dateElements[i]).html()) / 1000;
+//         formattedDate = moment.unix(dateItem).format("DD/MM/YYYY HH:mm");
 
-        var startApp = function() {
-            try {
-                gapi.load('auth2', function() {
-                    // Retrieve the singleton for the GoogleAuth library and set up the client.
-                    auth2 = gapi.auth2.init({
-                        client_id: '18774070907-55ags2bm4p28oqeubsuc1pd0g98095v7.apps.googleusercontent.com',
-                        cookiepolicy: 'single_host_origin',
-                        // Request scopes in addition to 'profile' and 'email'
-                        //scope: 'additional_scope'
-                    });
+//         $(dateElements[i]).html(formattedDate);
+//     }
+// }
 
-                    attachSignin(document.getElementById("google_login_button"));
-                });
-            } catch (e) {
-                console.log("home.page.js (Line: 402) : google api not loaded"); //debug
-            }
-        };
+// jQuery(document).ready(function($) {
+//     initGoogleLogin();
+//     initFacebookLogin();
 
-        function attachSignin(element) {
-            auth2.attachClickHandler(element, {},
-                function(googleUser) {
-                    var profile = googleUser.getBasicProfile();
-                    var idToken = googleUser.getAuthResponse().id_token;
+//     function initGoogleLogin() {
+//         var googleUser = {},
+//             params = {},
+//             auth2 = null;
 
-                    var successCallback = function(response) {
-                        googleButtonSigninLoad(false, ".google-button");
+//         var startApp = function() {
+//             try {
+//                 gapi.load('auth2', function() {
+//                     // Retrieve the singleton for the GoogleAuth library and set up the client.
+//                     auth2 = gapi.auth2.init({
+//                         client_id: '18774070907-55ags2bm4p28oqeubsuc1pd0g98095v7.apps.googleusercontent.com',
+//                         cookiepolicy: 'single_host_origin',
+//                         // Request scopes in addition to 'profile' and 'email'
+//                         //scope: 'additional_scope'
+//                     });
 
-                        swal({
-                            title: response.success_message,
-                            // text: response.success_message,
-                            icon: "success",
-                            // button: locale.common.proceed,
-                            closeOnClickOutside: false
-                        });
+//                     attachSignin(document.getElementById("google_login_button"));
+//                 });
+//             } catch (e) {
+//                 console.log("home.page.js (Line: 402) : google api not loaded"); //debug
+//             }
+//         };
 
-                        setTimeout(function() {
-                            window.location.href = "/";
-                        }, 2000);
-                    };
+//         function attachSignin(element) {
+//             auth2.attachClickHandler(element, {},
+//                 function(googleUser) {
+//                     var profile = googleUser.getBasicProfile();
+//                     var idToken = googleUser.getAuthResponse().id_token;
 
-                    var errorCallback = function(response) {
-                        if (element.id == "google_login_button_login_modal") {
-                            googleButtonSigninLoad(false, ".google-button");
-                        } else {
-                            googleButtonSignupLoad(false, ".google-button");
-                        }
+//                     var successCallback = function(response) {
+//                         googleButtonSigninLoad(false, ".google-button");
 
-                        $("#register_action_con").removeClass("hide").html(displayErrorFromArray(response.error));
-                    }
+//                         swal({
+//                             title: response.success_message,
+//                             // text: response.success_message,
+//                             icon: "success",
+//                             // button: locale.common.proceed,
+//                             closeOnClickOutside: false
+//                         });
 
-                    var params = {
-                        url: "/login/google",
-                        show_success_message: false,
-                        success_callback_function: successCallback,
-                        data: {
-                            google_user_id: profile.getId(),
-                            first_name: profile.getGivenName(),
-                            last_name: profile.getFamilyName(),
-                            email: profile.getEmail(),
-                            id_token: idToken
-                        }
-                    };
+//                         setTimeout(function() {
+//                             window.location.href = "/";
+//                         }, 2000);
+//                     };
 
-                    params.show_error_message = false;
-                    params.error_callback_function = errorCallback;
+//                     var errorCallback = function(response) {
+//                         if (element.id == "google_login_button_login_modal") {
+//                             googleButtonSigninLoad(false, ".google-button");
+//                         } else {
+//                             googleButtonSignupLoad(false, ".google-button");
+//                         }
 
-                    ajaxLoad(params);
-                },
-                function(error) {
-                    console.log(error); //debug
-                });
-        }
+//                         $("#register_action_con").removeClass("hide").html(displayErrorFromArray(response.error));
+//                     }
 
-        startApp();
+//                     var params = {
+//                         url: "/login/google",
+//                         show_success_message: false,
+//                         success_callback_function: successCallback,
+//                         data: {
+//                             google_user_id: profile.getId(),
+//                             first_name: profile.getGivenName(),
+//                             last_name: profile.getFamilyName(),
+//                             email: profile.getEmail(),
+//                             id_token: idToken
+//                         }
+//                     };
 
-        $(".google-button").click(function() {
-            googleButtonSignupLoad(true, ".google-button");
-        });
-    }
+//                     params.show_error_message = false;
+//                     params.error_callback_function = errorCallback;
 
+//                     ajaxLoad(params);
+//                 },
+//                 function(error) {
+//                     console.log(error); //debug
+//                 });
+//         }
 
+//         startApp();
 
-
-
-    function initFacebookLogin() {
-        $("#facebook_login_button").click(function() {
-            FB.login(function(response) {
-                facebookSuccessfulLogin(false, "facebook_login_button");
-            }, {
-                scope: 'public_profile,email'
-            });
-        });
-
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '338424913719787',
-                cookie: true, // enable cookies to allow the server to access the session
-                xfbml: true, // parse social plugins on this page
-                version: 'v2.8' // use graph api version 2.8
-            });
-
-            FB.getLoginStatus(function(response) {
-                if (response.status == "connected") {}
-            });
-
-        };
-
-        // Load the SDK asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-
-
-
-        var facebookSuccessfulLogin = function(redirectToBuy, element) {
-            FB.api('/me?fields=id,first_name,last_name,email', function(response) {
-                var successCallback = function(response) {
-                    facebookButtonSigninLoad(false, ".facebook-button");
-
-                    swal({
-                        title: locale.login.facebook_login_title,
-                        text: response.success_message,
-                        icon: "success",
-                        button: locale.common.proceed,
-                        closeOnClickOutside: false
-                    });
-
-                    setTimeout(function() {
-                        window.location.href = "/";
-                    }, 2000);
-                };
-
-                var errorCallback = function(response) {
-                    facebookButtonSigninLoad(false, ".facebook-button");
-
-                    $("#register_action_con").removeClass("hide").html(displayErrorFromArray(response.error));
-                }
-
-                var params = {
-                    url: "/login/facebook",
-                    show_success_message: false,
-                    success_callback_function: successCallback,
-                    error_callback_function: errorCallback,
-                    data: {
-                        facebook_user_id: response.id,
-                        first_name: response.first_name,
-                        last_name: response.last_name,
-                        email: response.email
-                    }
-                };
-
-                ajaxLoad(params);
-            });
-        }
-
-        $(".facebook-button").click(function() {
-            facebookButtonSignupLoad(true, ".facebook-button");
-        });
-    }
+//         $(".google-button").click(function() {
+//             googleButtonSignupLoad(true, ".google-button");
+//         });
+//     }
 
 
 
 
 
+//     function initFacebookLogin() {
+//         $("#facebook_login_button").click(function() {
+//             FB.login(function(response) {
+//                 facebookSuccessfulLogin(false, "facebook_login_button");
+//             }, {
+//                 scope: 'public_profile,email'
+//             });
+//         });
 
-    function googleButtonSignupLoad(loading, elementSelector) {
-        if (loading) {
-            $(elementSelector).find("span").html("Loading...");
-        } else {
-            $(elementSelector).find("span").html("Sign up with Google");
-        }
-    }
+//         window.fbAsyncInit = function() {
+//             FB.init({
+//                 appId: '338424913719787',
+//                 cookie: true, // enable cookies to allow the server to access the session
+//                 xfbml: true, // parse social plugins on this page
+//                 version: 'v2.8' // use graph api version 2.8
+//             });
 
-    function googleButtonSigninLoad(loading, elementSelector) {
-        if (loading) {
-            $(elementSelector).find("span").html("Loading...");
-        } else {
-            $(elementSelector).find("span").html("Sign in with Google");
-        }
-    }
+//             FB.getLoginStatus(function(response) {
+//                 if (response.status == "connected") {}
+//             });
 
-    function facebookButtonSignupLoad(loading, elementSelector) {
-        if (loading) {
-            $(elementSelector).find("span").html("Loading...");
-        } else {
-            $(elementSelector).find("span").html("Sign up with Facebook");
-        }
-    }
+//         };
 
-    function facebookButtonSigninLoad(loading, elementSelector) {
-        if (loading) {
-            $(elementSelector).find("span").html("Loading...");
-        } else {
-            $(elementSelector).find("span").html("Sign in with Facebook");
-        }
-    }
-});
+//         // Load the SDK asynchronously
+//         (function(d, s, id) {
+//             var js, fjs = d.getElementsByTagName(s)[0];
+//             if (d.getElementById(id)) return;
+//             js = d.createElement(s);
+//             js.id = id;
+//             js.src = "https://connect.facebook.net/en_US/sdk.js";
+//             fjs.parentNode.insertBefore(js, fjs);
+//         }(document, 'script', 'facebook-jssdk'));
+
+
+
+
+//         var facebookSuccessfulLogin = function(redirectToBuy, element) {
+//             FB.api('/me?fields=id,first_name,last_name,email', function(response) {
+//                 var successCallback = function(response) {
+//                     facebookButtonSigninLoad(false, ".facebook-button");
+
+//                     swal({
+//                         title: locale.login.facebook_login_title,
+//                         text: response.success_message,
+//                         icon: "success",
+//                         button: locale.common.proceed,
+//                         closeOnClickOutside: false
+//                     });
+
+//                     setTimeout(function() {
+//                         window.location.href = "/";
+//                     }, 2000);
+//                 };
+
+//                 var errorCallback = function(response) {
+//                     facebookButtonSigninLoad(false, ".facebook-button");
+
+//                     $("#register_action_con").removeClass("hide").html(displayErrorFromArray(response.error));
+//                 }
+
+//                 var params = {
+//                     url: "/login/facebook",
+//                     show_success_message: false,
+//                     success_callback_function: successCallback,
+//                     error_callback_function: errorCallback,
+//                     data: {
+//                         facebook_user_id: response.id,
+//                         first_name: response.first_name,
+//                         last_name: response.last_name,
+//                         email: response.email
+//                     }
+//                 };
+
+//                 ajaxLoad(params);
+//             });
+//         }
+
+//         $(".facebook-button").click(function() {
+//             facebookButtonSignupLoad(true, ".facebook-button");
+//         });
+//     }
+
+
+
+
+
+
+//     function googleButtonSignupLoad(loading, elementSelector) {
+//         if (loading) {
+//             $(elementSelector).find("span").html("Loading...");
+//         } else {
+//             $(elementSelector).find("span").html("Sign up with Google");
+//         }
+//     }
+
+//     function googleButtonSigninLoad(loading, elementSelector) {
+//         if (loading) {
+//             $(elementSelector).find("span").html("Loading...");
+//         } else {
+//             $(elementSelector).find("span").html("Sign in with Google");
+//         }
+//     }
+
+//     function facebookButtonSignupLoad(loading, elementSelector) {
+//         if (loading) {
+//             $(elementSelector).find("span").html("Loading...");
+//         } else {
+//             $(elementSelector).find("span").html("Sign up with Facebook");
+//         }
+//     }
+
+//     function facebookButtonSigninLoad(loading, elementSelector) {
+//         if (loading) {
+//             $(elementSelector).find("span").html("Loading...");
+//         } else {
+//             $(elementSelector).find("span").html("Sign in with Facebook");
+//         }
+//     }
+// });

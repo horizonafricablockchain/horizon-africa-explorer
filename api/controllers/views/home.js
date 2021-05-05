@@ -9,11 +9,11 @@ module.exports = {
     },
     fn: async function(inputs, exits) {
         var blockTrackerList = await BlockTracker.find({
-            type: BlockTracker.constants.type.eth
-        }),
+                type: BlockTracker.constants.type.eth
+            }),
             blockTracker = null,
             transactionCount = await EthTransaction.count({}),
-            latestBlockList = await EthBlock.find({}).sort("number DESC").limit(4),
+            latestBlockList = await EthBlock.find({}).sort("number DESC").limit(10),
             latestTransactionList = await EthTransaction.find({}).populate("eth_block").sort("createdAt DESC").limit(10),
             validatorList = await Validator.find(),
             findValidator = null,
@@ -24,7 +24,7 @@ module.exports = {
         }
 
         if (latestBlockList && latestBlockList.length > 0) {
-            for (var i = 0; i < latestBlockList.length;i++) {
+            for (var i = 0; i < latestBlockList.length; i++) {
                 latestBlockList[i].number_transactions = await EthTransaction.count({
                     eth_block: latestBlockList[i].id
                 });

@@ -1,0 +1,54 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .transaction-page
+        if(transaction)
+            .row
+                .col-md-8
+                    ul.list-group
+                        li.list-group-item.active Transaction Details
+                        li.list-group-item
+                            .row
+                                .col-md-2 Transaction Hash
+                                .col-md-10 #{transaction.hash}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Block
+                                .col-md-10
+                                    a(href="/block/" + transaction.blockNumber) #{transaction.blockNumber}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Confirmations
+                                .col-md-10 #{transaction.confirmations}
+                        li.list-group-item
+                            .row
+                                .col-md-2 From
+                                .col-md-10
+                                    a(href="/address/" + transaction.from) #{transaction.from}
+                        li.list-group-item
+                            .row
+                                .col-md-2 To
+                                .col-md-10 #{transaction.to}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Value
+                                .col-md-10.format-number #{transaction.value}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Gas
+                                .col-md-10.format-number #{transaction.gas} bytes
+                        li.list-group-item
+                            .row
+                                .col-md-2 Gas Price
+                                .col-md-10.format-number #{transaction.gasPrice}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Nonce
+                                .col-md-10.format-number #{transaction.nonce}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Input Data
+                                .col-md-10
+                                    textarea(disabled)
+                                        | #{transaction.input}
+        else
+            .alert.alert-info Transaction could not be found

@@ -26,6 +26,14 @@ header#topnav
                         a(href="/")
                             i.fa.fa-line-chart
                             span Home
+                    li
+                        a(href="/token/list")
+                            i.fa.fa-usd
+                            span Tokens
+
+                .navbar-form.navbar-right.hide(role="search")
+                    .form-group
+                        input(type="text" class="form-control" placeholder="Search")
 
         script.
             $(document).ready(function() {

@@ -1,0 +1,24 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .transaction-page
+        h3 Tokens on HABN
+        table.table.table-striped
+            thead
+                tr
+                    th Token
+                    th Description
+                    th Ticker
+                    th Total Supply
+                    th Address
+                    th Txn
+            tbody
+                each token in token_list
+                    tr
+                        td #{token.name}
+                        td #{token.description}
+                        td #{token.code}
+                        td.format-number #{token.total_supply}
+                        td.address
+                            a(href="/token/transaction/" + token.address) #{token.address}
+                        td.address
+                            a(href="/transaction/" + token.transaction_hash) #{token.transaction_hash}

@@ -3,6 +3,30 @@ module.exports.routes = {
         action: "views/home"
     },
 
+    "get /block/:block_number": {
+        action: "views/block/view-block"
+    },
+
+    "get /block/transaction/:block_number": {
+        action: "views/transaction/view-block-transactions"
+    },
+
+    "get /transaction/:transaction_hash": {
+        action: "views/transaction/view-transaction"
+    },
+
+    "get /address/:address": {
+        action: "views/address/view-address"
+    },
+
+    "get /token/list": {
+        action: "views/token/view-token-list"
+    },
+
+    "get /token/transaction/:address": {
+        action: "views/token/view-token-transaction"
+    },
+
 
     /* CRONS */
     "post /cron/scan-blocks": {

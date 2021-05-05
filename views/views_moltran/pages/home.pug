@@ -25,14 +25,28 @@ block content
                             h5.text-uppercase.text-white.m-0 
                                 span.pull-right Total Transactions
         .row
-            .col-md-12
+            .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
                         h3.panel-title Last 5 Blocks
                     .panel-body
                         .row
                             each block in latest_block_list
-                                .col-md-3
+                                panel.panel-color.panel-info
+                                    .panel-body
+                                        .col-md-4
+                                            a(href="/block/" + block.number) #{block.number}
+                                        .col-md-4
+                                            p Miner: #{block.validator.name}
+                                            p
+                                                span.timestamp-diff #{block.timestamp}
+                                        .col-md-4
+                                            if(block.number_transactions > 1)
+                                                a(href="/block/transaction/" + block.number) 
+                                                    p #{block.number_transactions} transactions
+                                            else
+                                                p #{block.number_transactions} transaction
+                                .col-md-12.hide
                                     .panel.panel-color.panel-info
                                         .panel-heading
                                             h3.panel-title Block Number: #{block.number}
@@ -47,14 +61,29 @@ block content
                                                 else
                                                     | #{block.miner}
 
-            .col-md-12
+            .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
                         h3.panel-title Latest Transactions
                     .panel-body
                         .row
                             each transaction in latest_transaction_list
-                                ul.list-group
+                                panel.panel-color.panel-info
+                                    .panel-body
+                                        .col-md-4.address
+                                            a(href="/transaction/" + transaction.hash_lower)
+                                                span #{transaction.hash}
+                                        .col-md-6
+                                            p.address From&nbsp;
+                                                span
+                                                    a(href="/address/" + transaction.from_lower) #{transaction.from_lower}
+                                            p.address To&nbsp;
+                                                span.address
+                                                    a(href="/address/" + transaction.from_lower) #{transaction.from_lower}
+                                        .col-md-2
+                                            | #{transaction.value} HABX
+
+                                ul.list-group.hide
                                     li.list-group-item
                                         .row
                                             .col-md-6
@@ -62,10 +91,12 @@ block content
                                                     span.label.label-primary #{transaction.hash}
                                                 p
                                                     | From&nbsp;
-                                                    span.label.label-primary #{transaction.from}
+                                                    span.label.label-primary
+                                                        a(href="/address/" + transaction.from_lower)  #{transaction.from}
                                                 p
                                                     | To&nbsp;
-                                                    span.label.label-primary #{transaction.to}
+                                                    span.label.label-primary
+                                                        a(href="/address/" + transaction.from_lower)  #{transaction.to}
                                                 p Block #{transaction.blockNumber}
                                             .col-md-6
                                                 a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data

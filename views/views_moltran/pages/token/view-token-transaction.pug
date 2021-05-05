@@ -1,0 +1,27 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .transaction-page
+        if(token)
+            h3 Transactions for Token #{token_name}
+            table.table.table-striped
+                thead
+                    tr
+                        th Txn Hash
+                        th Block
+                        th From
+                        th To
+                        th Value
+                tbody
+                    each transaction in transaction_list
+                        tr
+                            td.address
+                                a(href="/transaction/" + transaction.transaction_hash) #{transaction.transaction_hash}
+                            td.address
+                                a(href="/block/" + transaction.block_number) #{transaction.block_number}
+                            td.address
+                                a(href="/address/" + transaction.fromAddress) #{transaction.fromAddress}
+                            td.address
+                                a(href="/address/" + transaction.toAddress) #{transaction.toAddress}
+                            td #{transaction.amountTokens_absolute}
+        else
+            .alert.alert-info Token was not found

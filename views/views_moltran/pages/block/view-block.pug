@@ -1,0 +1,78 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .home-page
+        if(block)
+            .row
+                .col-md-6.col-sm-6.col-lg-3
+                    .mini-stat.clearfix.bx-shadow.bg-info
+                        span.mini-stat-icon
+                            i.ion-filing
+                        .mini-stat-info.text-right
+                            span.counter #{block.number}
+                            | Block Number
+            .row
+                .col-md-8
+                    ul.list-group
+                        li.list-group-item.active Block Details
+                        li.list-group-item
+                            .row
+                                .col-md-2 Block Height
+                                .col-md-10 #{block.number}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Timestamp
+                                .col-md-10.timestamp-label #{block.timestamp}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Transactions
+                                .col-md-10 #{block.number_transactions}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Mined By
+                                .col-md-10 #{block.validator.name}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Difficulty
+                                .col-md-10.format-number #{block.difficulty}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Total Difficulty
+                                .col-md-10.format-number #{block.totalDifficulty}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Size
+                                .col-md-10.format-number #{block.size} bytes
+                        li.list-group-item
+                            .row
+                                .col-md-2 Gas Used
+                                .col-md-10.format-number #{block.gasUsed}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Gas Limit
+                                .col-md-10.format-number #{block.gasLimit}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Extra Data
+                                .col-md-10 #{block.extraData}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Hash
+                                .col-md-10 #{block.hash}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Parent Hash
+                                .col-md-10 #{block.parentHash}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Extra Data
+                                .col-md-10 #{block.extraData}
+                        li.list-group-item
+                            .row
+                                .col-md-2 Sha3Uncles
+                                .col-md-10 #{block.sha3Uncles}
+                        li.list-group-item
+                            .row
+                                .col-md-2 StateRoot
+                                .col-md-10 #{block.stateRoot}
+        else
+            .alert.alert-info Block could not be found

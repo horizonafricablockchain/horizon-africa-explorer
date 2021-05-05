@@ -1,0 +1,26 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .transaction-page
+        h3 Transactions for address #{address}
+        table.table.table-striped
+            thead
+                tr
+                    th Txn Hash
+                    th Block
+                    th Age
+                    th From
+                    th To
+                    th Value
+            tbody
+                each transaction in transaction_list
+                    tr
+                        td.address
+                            a(href="/transaction/" + transaction.hash) #{transaction.hash}
+                        td.address
+                            a(href="/block/" + transaction.blockNumber) #{transaction.blockNumber}
+                        td.timestamp-diff #{transaction.blockTimestamp}
+                        td.address #{transaction.from}
+                        td.address #{transaction.to}
+                        td
+                            span.format-habx #{transaction.value}
+                            span &nbsp;#{sails.config.appsettings.blockchain.currency}
