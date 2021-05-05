@@ -24,8 +24,8 @@ module.exports = {
             }),
             token = null;
 
-        if (tokenResponse && tokenResponse.data) {
-            token = tokenResponse.data;
+        if (tokenResponse && tokenResponse.data && tokenResponse.data[0]) {
+            token = tokenResponse.data[0];
         }
 
         return exits.success({

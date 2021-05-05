@@ -25,7 +25,8 @@ block content
                         li.list-group-item
                             .row
                                 .col-md-2 Transactions
-                                .col-md-10 #{block.number_transactions}
+                                .col-md-10
+                                    a(href="/block/transaction/" + block.number) #{block.number_transactions}
                         li.list-group-item
                             .row
                                 .col-md-2 Mined By

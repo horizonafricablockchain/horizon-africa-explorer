@@ -2,7 +2,7 @@ extends ../../../views_moltran/layouts/clean-layout
 block content
     .transaction-page
         if(token)
-            h3 Transactions for Token #{token_name}
+            h3 Transactions for Token #{token.name}
             table.table.table-striped
                 thead
                     tr
