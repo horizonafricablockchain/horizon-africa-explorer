@@ -255,6 +255,7 @@ module.exports = {
     ***************************************************************************/
     onlyAllowOrigins: [
         "https://explorer.horizonafrica.io",
+        "https://explorer.habn.io",
     //   'https://staging.example.com',
     ],
 
