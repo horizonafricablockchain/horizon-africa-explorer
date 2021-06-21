@@ -39,6 +39,10 @@ module.exports = {
             }
         }
 
+        for (var i = 0; i < latestTransactionList.length;i++) {
+            latestTransactionList[i].ether_value = web3.utils.fromWei(latestTransactionList[i].value, "ether");
+        }
+
         // for(var i=0;i<latestTransactionList.length;i++) {
         //     sails.log.debug("home.js (Line: 42) : latestTransactionList[i].input");//debug
         //     sails.log.debug(latestTransactionList[i].input);//debug
