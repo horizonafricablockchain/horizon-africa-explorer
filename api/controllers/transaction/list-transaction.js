@@ -67,10 +67,10 @@ module.exports = {
                 findPromise.sort(inputs.data.sort);
             }
 
-            findPromise.populate("eth_block").then(function(array) {
-                exits.success({
-                    data: array
-                });
+            transactionList = await findPromise.populate("eth_block");
+
+            exits.success({
+                data: transactionList
             });
         } catch (err) {
             sails.log.debug(err);

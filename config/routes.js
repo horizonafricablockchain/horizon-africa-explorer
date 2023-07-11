@@ -43,6 +43,10 @@ module.exports.routes = {
     "post /api/v1/transaction/list": {
         action: "transaction/list-transaction"
     },
+    
+    "post /api/v1/transaction/count": {
+        action: "transaction/count-transaction"
+    },
 
     "post /api/v1/token-transaction/list": {
         action: "token-transaction/list-token-transaction"

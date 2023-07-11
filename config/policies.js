@@ -6,4 +6,6 @@ module.exports.policies = {
     
     "transaction/list-transaction": "is-valid-token",
 
+    "transaction/count-transaction": "is-valid-token",
+
 };
