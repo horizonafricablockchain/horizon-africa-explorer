@@ -1,12 +1,12 @@
 module.exports = {
-    friendlyName: "Retrieve list of transactions based on query and pagination parameters",
-    description: "Retrieve list of transactions based on query and pagination parameters",
+    friendlyName: "Retrieve list of validators based on query and pagination parameters",
+    description: "Retrieve list of validators based on query and pagination parameters",
     inputs: {
         data: {
             type: {},
             example: {
                 search_criteria: {
-                    to_lower: "0x8fbb9d871234c8d7ff0846035bbb3ddf7097a489"
+                    block_number: "01"
                 },
                 pagination: {
                     skip: 50,
@@ -39,7 +39,7 @@ module.exports = {
             transactionList = [],
             searchCriteria = {},
             skip = 0,
-            limit = sails.config.appsettings.record.limit,
+            limit = 0,
             sort = "",
             findPromise = null,
             post = null;
@@ -49,7 +49,7 @@ module.exports = {
                 searchCriteria = inputs.data.search_criteria;
             }
 
-            findPromise = EthTransaction.find(searchCriteria);
+            findPromise = Validator.find(searchCriteria);
 
             if (inputs.data && inputs.data.pagination) {
                 if (inputs.data.pagination.skip) {
@@ -59,18 +59,18 @@ module.exports = {
                 if (inputs.data.pagination.limit) {
                     limit = inputs.data.pagination.limit;
                 }
+
+                findPromise.skip(skip).limit(limit);
             }
-            
-            findPromise.skip(skip).limit(limit);
 
             if (inputs.data && inputs.data.sort) {
                 findPromise.sort(inputs.data.sort);
             }
 
-            transactionList = await findPromise.populate("eth_block");
-
-            exits.success({
-                data: transactionList
+            findPromise.then(function(array) {
+                exits.success({
+                    data: array
+                });
             });
         } catch (err) {
             sails.log.debug(err);

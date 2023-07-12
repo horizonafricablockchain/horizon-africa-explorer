@@ -1,12 +1,12 @@
 module.exports = {
-    friendlyName: "Retrieve list of transactions based on query and pagination parameters",
-    description: "Retrieve list of transactions based on query and pagination parameters",
+    friendlyName: "Retrieve list of EthBlock based on query and pagination parameters",
+    description: "Retrieve list of EthBlock based on query and pagination parameters",
     inputs: {
         data: {
             type: {},
             example: {
                 search_criteria: {
-                    to_lower: "0x8fbb9d871234c8d7ff0846035bbb3ddf7097a489"
+                    block_number: "01"
                 },
                 pagination: {
                     skip: 50,
@@ -41,6 +41,7 @@ module.exports = {
             skip = 0,
             limit = sails.config.appsettings.record.limit,
             sort = "",
+            list = [],
             findPromise = null,
             post = null;
 
@@ -49,7 +50,7 @@ module.exports = {
                 searchCriteria = inputs.data.search_criteria;
             }
 
-            findPromise = EthTransaction.find(searchCriteria);
+            findPromise = EthBlock.find(searchCriteria);
 
             if (inputs.data && inputs.data.pagination) {
                 if (inputs.data.pagination.skip) {
@@ -67,10 +68,10 @@ module.exports = {
                 findPromise.sort(inputs.data.sort);
             }
 
-            transactionList = await findPromise.populate("eth_block");
+            list = await findPromise;
 
             exits.success({
-                data: transactionList
+                data: list
             });
         } catch (err) {
             sails.log.debug(err);
