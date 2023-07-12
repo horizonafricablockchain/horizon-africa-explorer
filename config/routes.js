@@ -43,7 +43,7 @@ module.exports.routes = {
     "post /api/v1/transaction/list": {
         action: "transaction/list-transaction"
     },
-    
+
     "post /api/v1/transaction/count": {
         action: "transaction/count-transaction"
     },
@@ -55,5 +55,14 @@ module.exports.routes = {
     /* TOKEN API */
     "post /api/v1/token/add": {
         action: "token/add-token"
-    }
+    },
+
+    /* BLOCKS API */
+    "post /api/v1/block-tracker/list-block-tracker": {
+        action: "block-tracker/list-block-tracker"
+    },
+
+    "post /api/v1/eth-block/list-eth-block": {
+        action: "eth-block/list-eth-block"
+    },
 };
