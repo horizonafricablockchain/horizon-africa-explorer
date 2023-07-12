@@ -8,4 +8,12 @@ module.exports.policies = {
 
     "transaction/count-transaction": "is-valid-token",
 
+    "block-tracker/list-block-tracker": "is-valid-token",
+
+    "eth-block/list-eth-block": "is-valid-token",
+
+    "validator/list-validator": "is-valid-token",
+
+    "eth-block/count-eth-block": "is-valid-token",
+
 };

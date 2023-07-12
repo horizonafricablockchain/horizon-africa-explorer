@@ -39,8 +39,9 @@ module.exports = {
             transactionList = [],
             searchCriteria = {},
             skip = 0,
-            limit = 0,
+            limit = sails.config.appsettings.record.limit,
             sort = "",
+            list = [],
             findPromise = null,
             post = null;
 
@@ -59,18 +60,18 @@ module.exports = {
                 if (inputs.data.pagination.limit) {
                     limit = inputs.data.pagination.limit;
                 }
-
-                findPromise.skip(skip).limit(limit);
             }
+            
+            findPromise.skip(skip).limit(limit);
 
             if (inputs.data && inputs.data.sort) {
                 findPromise.sort(inputs.data.sort);
             }
 
-            findPromise.then(function(array) {
-                exits.success({
-                    data: array
-                });
+            list = await findPromise;
+
+            exits.success({
+                data: list
             });
         } catch (err) {
             sails.log.debug(err);

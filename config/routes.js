@@ -65,4 +65,12 @@ module.exports.routes = {
     "post /api/v1/eth-block/list-eth-block": {
         action: "eth-block/list-eth-block"
     },
+
+    "post /api/v1/validator/list-validator": {
+        action: "validator/list-validator"
+    },
+
+    "post /api/v1/eth-block/count-eth-block": {
+        action: "eth-block/count-eth-block"
+    },
 };
