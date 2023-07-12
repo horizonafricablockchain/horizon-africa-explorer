@@ -16,4 +16,8 @@ module.exports.policies = {
 
     "eth-block/count-eth-block": "is-valid-token",
 
+    "token/list-token": "is-valid-token",
+
+    "token/count-token": "is-valid-token",
+
 };

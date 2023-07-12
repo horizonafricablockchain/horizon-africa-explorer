@@ -73,4 +73,12 @@ module.exports.routes = {
     "post /api/v1/eth-block/count-eth-block": {
         action: "eth-block/count-eth-block"
     },
+
+    "post /api/v1/token/list-token": {
+        action: "token/list-token"
+    },
+
+    "post /api/v1/token/count-token": {
+        action: "token/count-token"
+    },
 };
