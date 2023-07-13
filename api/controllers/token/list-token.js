@@ -65,7 +65,7 @@ module.exports = {
 
             tokenListResponse = await sails.helpers.utilities.haApiUtility("/api/v1/token/list", "POST", {
                 search_criteria: searchCriteria,
-                pagination: pagination,
+                // pagination: pagination,
                 sort: sort
             });
 
