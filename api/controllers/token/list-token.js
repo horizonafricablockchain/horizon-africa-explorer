@@ -70,10 +70,8 @@ module.exports = {
             });
 
             if (tokenListResponse && tokenListResponse.data) {
-                findPromise = tokenListResponse.data;
+                list = tokenListResponse.data;
             }
-
-            list = await findPromise;
 
             exits.success({
                 data: list
