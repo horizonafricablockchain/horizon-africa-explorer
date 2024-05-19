@@ -24,3 +24,9 @@ block content
                         td
                             span.format-habx #{transaction.value}
                             span &nbsp;#{sails.config.appsettings.blockchain.currency}
+        // Pagination Controls
+        .pagination
+            if currentPage > 1
+                a.btn.btn-primary(href=`/address/transactions/${address}?page=${currentPage - 1}&pageSize=${pageSize}`) Previous
+            if currentPage < totalPages
+                a.btn.btn-primary(href=`/address/transactions/${address}?page=${currentPage + 1}&pageSize=${pageSize}`) Next
