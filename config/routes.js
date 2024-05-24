@@ -1,11 +1,4 @@
 module.exports.routes = {
-    '/': { view: 'pages/homepage' },
-    
-};
-
-
-
-module.exports.routes = {
     "get /": {
         action: "views/home"
     },
