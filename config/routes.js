@@ -7,6 +7,10 @@ module.exports.routes = {
         action: "views/block/view-block"
     },
 
+    "post /block/delete/:block_number": {
+        action: "block/delete-block"
+    }
+
     "get /block/transaction/:block_number": {
         action: "views/transaction/view-block-transactions"
     },
