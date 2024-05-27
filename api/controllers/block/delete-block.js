@@ -1,6 +1,4 @@
 module.exports = {
-    //add comments here
-    // add more comments
     friendlyName: 'Delete block',
     description: 'Deletes block based on block number',
     inputs: {
