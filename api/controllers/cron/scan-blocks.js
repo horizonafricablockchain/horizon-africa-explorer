@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
-        var blocksToScan = {},
+        let blocksToScan = {},
             scannedBlocks = [];
 
         blocksToScan = await sails.helpers.eth.getBlocksToScan();
