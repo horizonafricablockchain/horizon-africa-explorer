@@ -17,8 +17,13 @@ module.exports = {
     },
     fn: async function(inputs, exits) {
         try {
-            let blocks = await EthBlock.find({ number: inputs.blockNumber });
-            return exits.success({ blocks });
+            let blocks = await EthBlock.find({
+                number: inputs.blockNumber
+            });
+
+            return exits.success({
+                blocks
+            });
         } catch (err) {
             return exits.jsonError(err.message);
         }
