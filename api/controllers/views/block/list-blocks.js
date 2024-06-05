@@ -2,7 +2,7 @@ module.exports = {
     friendlyName: "List blocks",
     description: "Returns a list of blocks based on the block number",
     inputs: {
-        blockNumber: {
+        block_number: {
             type: "number",
             required: true
         }
@@ -18,7 +18,7 @@ module.exports = {
     fn: async function(inputs, exits) {
         try {
             let blocks = await EthBlock.find({
-                number: inputs.blockNumber
+                number: inputs.block_number
             });
 
             return exits.success({
