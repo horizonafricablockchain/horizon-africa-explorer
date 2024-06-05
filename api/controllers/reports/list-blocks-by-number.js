@@ -19,7 +19,6 @@ module.exports = {
         }
     },
     fn: async function (inputs, exits) {
-        // Fetch blocks based on the provided block numbers
         const blocks = await EthBlock.find({
             number: { in: inputs.block_numbers }
         });
