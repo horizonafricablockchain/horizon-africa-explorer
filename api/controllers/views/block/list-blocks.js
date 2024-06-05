@@ -1,5 +1,5 @@
 module.exports = {
-    friendlyName: "List blocks",
+    friendlyName: "Listss blocks",
     description: "Returns a list of blocks based on the block number",
     inputs: {
         block_number: {
@@ -20,6 +20,7 @@ module.exports = {
             let blocks = await EthBlock.find({
                 number: inputs.block_number
             });
+
 
             return exits.success({
                 blocks
