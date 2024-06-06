@@ -15,10 +15,6 @@ module.exports = {
             scannedBlocks = [];
 
         blocksToScan = await sails.helpers.eth.getBlocksToScan();
-
-        sails.log.debug("scan-eth.js (Line: 15) : Scanning blocks"); //debug
-        sails.log.debug(blocksToScan.startBlockNumber + " - " + blocksToScan.endBlockNumber); //debug
-
         scannedBlocks = await sails.helpers.eth.scanBlocks(blocksToScan.startBlockNumber, blocksToScan.endBlockNumber);
 
         if (blocksToScan.blockTrackerFound) {
