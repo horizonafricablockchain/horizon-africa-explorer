@@ -1,5 +1,5 @@
 module.exports = {
-    friendlyName: "Get block information",
+    friendlyName: "Get block informations",
     description: "Fetches block information based on block number.",
     inputs: {
         block_number: {
