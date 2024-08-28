@@ -19,6 +19,9 @@ module.exports = {
             type: "string",
             required: true,
             maxLength: 200
+        },
+        personify_action: {
+            type: "string"
         }
     }
 };
