@@ -1,26 +1,26 @@
 module.exports = {
-  friendlyName: 'List Blocks',
-  description: 'Display a list of blocks within a specified range.',
+  friendlyName: "List Blocks",
+  description: "Display a list of blocks within a specified range.",
 
   inputs: {
     startBlock: {
-      type: 'number',
+      type: "number",
       required: true,
-      description: 'The starting block number for the range.'
+      description: "The starting block number for the range."
     },
     endBlock: {
-      type: 'number',
+      type: "number",
       required: true,
-      description: 'The ending block number for the range.'
+      description: "The ending block number for the range."
     }
   },
 
   exits: {
     success: {
-      viewTemplatePath: 'pages/block/list-blocks'
+      viewTemplatePath: "pages/block/list-blocks"
     },
     jsonError: {
-      responseType: 'jsonError'
+      responseType: "jsonError"
     }
   },
 
@@ -28,8 +28,8 @@ module.exports = {
     try {
       const blocks = await EthBlock.find({
         number: {
-          '>=': inputs.startBlock,
-          '<=': inputs.endBlock
+          ">=": inputs.startBlock,
+          "<=": inputs.endBlock
         }
       });
       return exits.success({
@@ -42,3 +42,4 @@ module.exports = {
     }
   }
 };
+                                
