@@ -1,0 +1,21 @@
+extends ../../layouts/clean-layout.pug
+
+block content
+  if blocks.length
+    h2 Block List
+    table
+      thead
+        tr
+          th Block Number
+          th Miner
+          th Timestamp
+          th Transactions
+      tbody
+        each block in blocks
+          tr
+            td= block.number
+            td= block.miner
+            td= new Date(block.timestamp * 1000).toLocaleString()
+            td= block.transactions.length
+  else
+    p No blocks found for the given range.
