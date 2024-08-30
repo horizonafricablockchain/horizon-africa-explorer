@@ -1,0 +1,35 @@
+extends ../../layouts/clean-layout.pug
+
+block content
+    .row
+        .col-sm-12
+            .card-box
+                h4.text-dark.header-title.m-t-0 Listing Blocks
+                p.text-muted.m-b-30.font-13
+                    | List of blocks with details and pagination.
+                table.table.table-striped
+                    thead
+                        tr
+                            th Block Number
+                            th Miner
+                            th Gas Used
+                            th Timestamp
+                    tbody
+                        each block in blocks
+                            tr
+                                td #{block.number}
+                                td #{block.miner}
+                                td #{block.gasUsed}
+                                td #{new Date(block.timestamp * 1000).toLocaleString()}
+
+                nav.text-xs-center
+                    ul.pagination.pagination-split
+                        if (pagination.previousPage)
+                            li.page-item
+                                a.page-link(href=pagination.previousPageLink) Previous
+                        each pageNumber in pagination.pageNumbers
+                            li.page-item(class=pageNumber.active ? 'active' : '')
+                                a.page-link(href=pageNumber.link) #{pageNumber.number}
+                        if (pagination.nextPage)
+                            li.page-item
+                                a.page-link(href=pagination.nextPageLink) Next
