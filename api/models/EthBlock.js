@@ -1,73 +1,71 @@
-/**
- * EthBlock.js
- *
- * @description :: Model for Ethereum Blocks
- */
-
 module.exports = {
     attributes: {
         author: {
-            type: "string"
+            type: 'string'
         },
         difficulty: {
-            type: "string"
+            type: 'number'
         },
         extraData: {
-            type: "string"
+            type: 'string'
         },
         gasLimit: {
-            type: "number"
+            type: 'number'
         },
         gasUsed: {
-            type: "number"
+            type: 'number'
         },
         hash: {
-            type: "string"
+            type: 'string'
         },
         hash_lower: {
-            type: "string"
+            type: 'string'
         },
         logsBloom: {
-            type: "string"
+            type: 'string'
         },
         miner: {
-            type: "string"
+            type: 'string'
         },
         mixHash: {
-            type: "string"
+            type: 'string'
         },
         nonce: {
-            type: "string"
+            type: 'string'
         },
         number: {
-            type: "number"
+            type: 'number'
         },
         parentHash: {
-            type: "string"
+            type: 'string'
         },
         parentHash_lower: {
-            type: "string"
+            type: 'string'
         },
         receiptsRoot: {
-            type: "string"
+            type: 'string'
         },
         sha3Uncles: {
-            type: "string"
+            type: 'string'
         },
         size: {
-            type: "number"
+            type: 'number'
         },
         stateRoot: {
-            type: "string"
+            type: 'string'
         },
         timestamp: {
-            type: "number"
+            type: 'number'
         },
         totalDifficulty: {
-            type: "string"
+            type: 'number'
         },
         transactionsRoot: {
-            type: "string"
+            type: 'string'
+        },
+        transactions: {
+            collection: 'ethtransaction',
+            via: 'blockNumber'
         }
     }
 };
