@@ -1,0 +1,39 @@
+extends ../../../views_moltran/layouts/clean-layout
+
+block content
+    .block-list-page
+        form(action="/blocks/search", method="GET")
+            .form-group
+                label(for="blockNumber") Block Number
+                input#blockNumber.form-control(type="number", name="blockNumber", placeholder="Enter Block Number")
+            button.btn.btn-primary(type="submit") Search
+            button.btn.btn-secondary(type="button", onclick="window.location.href='/blocks'") Reset
+
+        if(blocks && blocks.length)
+            table.table.table-responsive
+                thead
+                    tr
+                        th Block Number
+                        th Timestamp
+                        th Transactions
+                        th Mined By
+                tbody
+                    each block in blocks
+                        tr
+                            td #{block.number}
+                            td #{block.timestamp}
+                            td #{block.transactions.length}
+                            td #{block.miner}
+
+            // Pagination Links
+            if(pagination)
+                .pagination
+                    if(pagination.prevPage)
+                        a.page-link(href=`/blocks?page=${pagination.prevPage}`) Previous
+                    if(pagination.pages)
+                        each page in pagination.pages
+                            a.page-link(href=`/blocks?page=${page}`) #{page}
+                    if(pagination.nextPage)
+                        a.page-link(href=`/blocks?page=${pagination.nextPage}`) Next
+        else
+            .alert.alert-info No blocks found.
