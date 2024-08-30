@@ -41,4 +41,8 @@ module.exports = {
             block: block
         });
     }
-}
+};
+
+module.exports.redirectToList = async function (req, res) {
+    return res.redirect('/block/list');
+};
