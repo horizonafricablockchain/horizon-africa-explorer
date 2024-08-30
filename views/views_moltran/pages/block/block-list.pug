@@ -1,0 +1,23 @@
+extends ../../layouts/clean-layout
+
+block content
+  .block-list-page
+    h1 Block List
+    table.table
+      thead
+        tr
+          th Block Number
+          th Timestamp
+          th Transactions
+      tbody
+        each block in blocks
+          tr
+            td= block.number
+            td= block.timestamp
+            td= block.transactions.length
+    .pagination
+      if currentPage > 1
+        a(href=`/block-list?page=${currentPage - 1}&limit=${limit}`) Previous
+      | Page #{currentPage} of #{totalPages}
+      if currentPage < totalPages
+        a(href=`/block-list?page=${currentPage + 1}&limit=${limit}`) Next
