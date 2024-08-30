@@ -1,0 +1,25 @@
+extends ../../../views_moltran/layouts/clean-layout
+
+block content
+    .block-list-page
+        h1 Block List
+        table.table.table-striped
+            thead
+                tr
+                    th Block Number
+                    th Timestamp
+                    th Transactions
+                    th Validator
+                    th Gas Used
+                    th Size
+            tbody
+                each block in blocks
+                    tr
+                        td #{block.number}
+                        td #{block.timestamp}
+                        td #{block.number_transactions}
+                        td #{block.miner}
+                        td #{block.gasUsed}
+                        td #{block.size}
+        .pagination
+            //- Pagination logic will be inserted here
