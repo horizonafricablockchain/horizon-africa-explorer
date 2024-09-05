@@ -1,112 +1,19 @@
-extends ../../views_moltran/layouts/clean-layout
-block content
-    .home-page
-        .row
-            .col-md-6.col-sm-6.col-lg-3
-                .mini-stat.clearfix.bx-shadow.bg-info
-                    span.mini-stat-icon
-                        i.ion-filing
-                    .mini-stat-info.text-right
-                        span.counter #{block_tracker.eth_current_block}
-                        | Blocks Mined
-                    .tiles-progress
-                        .m-t-20
-                            h5.text-uppercase.text-white.m-0 
-                                span.pull-right Synced up to Block ##{block_tracker.block_number}
-            .col-md-6.col-sm-6.col-lg-3
-                .mini-stat.clearfix.bx-shadow.bg-info
-                    span.mini-stat-icon
-                        i.ion-arrow-graph-up-right
-                    .mini-stat-info.text-right
-                        span.counter #{transaction_count}
-                        | Transactions
-                    .tiles-progress
-                        .m-t-20
-                            h5.text-uppercase.text-white.m-0 
-                                span.pull-right Total Transactions
-        .row
-            .col-md-6
-                .panel.panel-color.panel-primary
-                    .panel-heading
-                        h3.panel-title Last 5 Blocks
-                    .panel-body
-                        .row
-                            each block in latest_block_list
-                                panel.panel-color.panel-info
-                                    .panel-body
-                                        .col-md-4
-                                            a(href="/block/" + block.number) #{block.number}
-                                        .col-md-4
-                                            p Miner: #{block.validator.name}
-                                            p
-                                                span.timestamp-diff #{block.timestamp}
-                                        .col-md-4
-                                            if(block.number_transactions > 1)
-                                                a(href="/block/transaction/" + block.number) 
-                                                    p #{block.number_transactions} transactions
-                                            else
-                                                p #{block.number_transactions} transaction
-                                .col-md-12.hide
-                                    .panel.panel-color.panel-info
-                                        .panel-heading
-                                            h3.panel-title Block Number: #{block.number}
-                                        .panel-body
-                                            if(block.number_transactions > 1)
-                                                p #{block.number_transactions} transactions
-                                            else
-                                                p #{block.number_transactions} transaction
-                                            p Validator&nbsp;
-                                                if(block.validator && block.validator.name)
-                                                    a(href=block.validator.url, target="_blank") #{block.validator.name}
-                                                else
-                                                    | #{block.miner}
+module.exports = {
+    friendlyName: 'Show home page',
+    description: 'Display the dashboard "homepage".',
+    inputs: {},
+    exits: {
+        success: {
+            viewTemplatePath: 'pages/home'
+        }
+    },
+    fn: async function(inputs, exits) {
+        // All done.
+        return exits.success();
+    }
+};
 
-            .col-md-6
-                .panel.panel-color.panel-primary
-                    .panel-heading
-                        h3.panel-title Latest Transactions
-                    .panel-body
-                        .row
-                            each transaction in latest_transaction_list
-                                panel.panel-color.panel-info
-                                    .panel-body
-                                        .col-md-4.address
-                                            a(href="/transaction/" + transaction.hash_lower)
-                                                span #{transaction.hash}
-                                        .col-md-6
-                                            p.address From&nbsp;
-                                                span
-                                                    a(href="/address/" + transaction.from_lower) #{transaction.from_lower}
-                                            p.address To&nbsp;
-                                                span.address
-                                                    a(href="/address/" + transaction.to_lower) #{transaction.to_lower}
-                                        .col-md-2
-                                            | #{transaction.ether_value} HABX
-
-                                ul.list-group.hide
-                                    li.list-group-item
-                                        .row
-                                            .col-md-6
-                                                p Transaction hash:&nbsp;
-                                                    span.label.label-primary #{transaction.hash}
-                                                p
-                                                    | From&nbsp;
-                                                    span.label.label-primary
-                                                        a(href="/address/" + transaction.from_lower)  #{transaction.from}
-                                                p
-                                                    | To&nbsp;
-                                                    span.label.label-primary
-                                                        a(href="/address/" + transaction.from_lower)  #{transaction.to}
-                                                p Block #{transaction.blockNumber}
-                                            .col-md-6
-                                                a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data
-                                                p.transaction-input #{transaction.input}
-
-
-    script.
-        $(document).ready(function() {
-            $(".transaction-input-header").click(function(e) {
-                e.preventDefault();
-                $(this).parent().find(".transaction-input").slideToggle();
-            });
-        });
+module.exports.routes = {
+    '/': { view: 'pages/home' },
+    '/block-list': 'BlockController.blockList'
+};
