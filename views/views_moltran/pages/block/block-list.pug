@@ -1,0 +1,19 @@
+extends ../../layouts/clean-layout
+block content
+    .block-list-page
+        h2 Block List
+        table.table.table-striped
+            thead
+                tr
+                    th Number
+                    th Miner
+                    th Timestamp
+                    th Transactions
+            tbody
+                each block in blockList
+                    tr
+                        td
+                            a(href=`/block/${block.number}`) #{block.number}
+                        td #{block.miner}
+                        td #{block.timestamp}
+                        td #{block.transactions.length}
