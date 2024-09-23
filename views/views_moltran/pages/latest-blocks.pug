@@ -1,0 +1,14 @@
+extends ../../layouts/clean-layout
+block content
+    .latest-blocks-page
+        h2 Latest Top 10 Blocks
+        ul.block-list
+            each block in blocks
+                li
+                    h3 Block # #{block.number}
+                    p
+                        | Miner: #{block.miner}
+                        br
+                        | Timestamp: #{new Date(block.timestamp).toLocaleString()}
+                        br
+                        | Transactions: #{block.transactions.length}
