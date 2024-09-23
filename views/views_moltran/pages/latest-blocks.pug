@@ -1,0 +1,25 @@
+extends ../../views_moltran/layouts/clean-layout
+block content
+    .latest-blocks-page
+        .row
+            .col-md-12
+                .panel.panel-color.panel-primary
+                    .panel-heading
+                        h3.panel-title Latest Top 10 Blocks
+                    .panel-body
+                        .row
+                            each block in latest_block_list
+                                .panel.panel-color.panel-info
+                                    .panel-body
+                                        .col-md-4
+                                            a(href="/block/" + block.number) #{block.number}
+                                        .col-md-4
+                                            p Miner: #{block.validator.name}
+                                            p
+                                                span.timestamp-diff #{block.timestamp}
+                                        .col-md-4
+                                            if(block.number_transactions > 1)
+                                                a(href="/block/transaction/" + block.number) 
+                                                    p #{block.number_transactions} transactions
+                                            else
+                                                p #{block.number_transactions} transaction
