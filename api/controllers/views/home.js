@@ -43,26 +43,19 @@ module.exports = {
             latestTransactionList[i].ether_value = web3.utils.fromWei(latestTransactionList[i].value, "ether");
         }
 
-        // for(var i=0;i<latestTransactionList.length;i++) {
-        //     sails.log.debug("home.js (Line: 42) : latestTransactionList[i].input");//debug
-        //     sails.log.debug(latestTransactionList[i].input);//debug
-
-        //     var decoded = web3.utils.toAscii(latestTransactionList[i].input);
-        //     latestTransactionList[i].input
-
-        //     sails.log.debug("home.js (Line: 48) : decoded");//debug
-        //     // sails.log.debug(web3.utils.toAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToString(latestTransactionList[i].input));//debug
-
-        //     break;
-        // }
-
         return exits.success({
             block_tracker: blockTracker,
             transaction_count: transactionCount,
             latest_block_list: latestBlockList,
             latest_transaction_list: latestTransactionList
+        });
+    },
+    viewTopBlocks: async function(inputs, exits) { // New function
+        var latestBlocks = await EthBlock.find()
+            .sort('number DESC')
+            .limit(10);
+        return exits.success({
+            latest_blocks: latestBlocks
         });
     }
 }

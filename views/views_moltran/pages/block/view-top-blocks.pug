@@ -1,0 +1,21 @@
+extends ../../layouts/clean-layout
+block content
+    .top-blocks-page
+        .row
+            .col-md-12
+                h2 Latest Top 10 Blocks
+                ul.list-group
+                    each block in latest_blocks
+                        li.list-group-item
+                            .row
+                                .col-md-2
+                                    | Block Number:
+                                    a(href="/block/" + block.number) #{block.number}
+                                .col-md-3
+                                    | Miner: #{block.miner}
+                                .col-md-3
+                                    | Timestamp: #{new Date(block.timestamp * 1000).toLocaleString()}
+                                .col-md-3
+                                    | Transactions: #{block.transactions ? block.transactions.length : 0}
+                                .col-md-3
+                                    | Gas Used: #{block.gasUsed}
