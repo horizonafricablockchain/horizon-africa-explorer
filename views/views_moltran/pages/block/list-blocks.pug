@@ -1,0 +1,18 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    h3 Latest 10 Ethereum Blocks
+    table.table.table-striped
+        thead
+            tr
+                th Block Number
+                th Miner
+                th Timestamp
+                th Transactions
+        tbody
+            each block in blocks
+                tr
+                    td
+                        a(href="/block/" + block.number) #{block.number}
+                    td #{block.miner}
+                    td #{new Date(block.timestamp * 1000).toISOString()}
+                    td #{block.transactions.length}
