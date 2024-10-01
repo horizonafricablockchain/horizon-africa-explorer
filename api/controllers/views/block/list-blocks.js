@@ -3,7 +3,7 @@ module.exports = {//changes
     description: "Displays a list of the last 10 blocks",
     exits: {
         success: {
-            responseType: "view",
+            responseType: "view",//this is just a comment
             viewTemplatePath: "views_moltran/pages/block/list-blocks.pug"
         }
     },
