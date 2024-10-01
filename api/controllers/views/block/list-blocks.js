@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = {//change
     friendlyName: "List latest blocks",
     description: "Displays a list of the last 10 blocks",
     exits: {
