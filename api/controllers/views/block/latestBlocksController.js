@@ -1,6 +1,6 @@
 // latestBlocksController.js
 
-const EthBlock = require('../../../models/EthBlock');
+const EthBlock = require('../../../models/EthBlock');//test
 
 module.exports = {
     friendlyName: 'View latest blocks',
