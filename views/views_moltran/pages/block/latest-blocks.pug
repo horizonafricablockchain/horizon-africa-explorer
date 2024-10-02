@@ -1,0 +1,15 @@
+extends ../../layouts/clean-layout.pug
+
+block content
+    .latest-blocks-page
+        h1 Latest Ethereum Blocks
+
+        ul.list-group
+            each block in blocks
+                li.list-group-item
+                    .row
+                        .col-md-4 Block Number: #{block.number}
+                        .col-md-4 Created At: #{block.createdAt}
+                        .col-md-4 Number of Transactions: #{block.number_transactions}
+
+    a(href="/") Go back to Home
