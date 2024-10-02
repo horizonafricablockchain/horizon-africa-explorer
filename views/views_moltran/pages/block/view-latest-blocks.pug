@@ -1,0 +1,19 @@
+extends ../../../views_moltran/layouts/clean-layout
+block content
+    .block-page
+        h3 Latest 10 Blocks
+        table.table.table-striped
+            thead
+                tr
+                    th Block Number
+                    th Miner
+                    th Timestamp
+                    th Number of Transactions
+            tbody
+                each block in latest_block_list
+                    tr
+                        td
+                            a(href="/block/" + block.number) #{block.number}
+                        td #{block.miner}
+                        td.timestamp-label #{block.timestamp}
+                        td #{block.number_transactions}
