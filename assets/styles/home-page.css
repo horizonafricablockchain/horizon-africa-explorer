@@ -1,0 +1,26 @@
+/* Styles for the latest blocks display on the home page */
+.latest-blocks-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.latest-blocks-table th, .latest-blocks-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.latest-blocks-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.latest-blocks-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.latest-blocks-table tr:hover {
+    background-color: #ddd;
+}
