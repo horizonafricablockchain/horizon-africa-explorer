@@ -1,3 +1,4 @@
+//comments
 module.exports = {
     friendlyName: "Get latest 10 Ethereum blocks",
     description: "Fetch the latest 10 blocks from the Ethereum blockchain",
