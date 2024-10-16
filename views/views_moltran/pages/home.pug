@@ -1,9 +1,12 @@
-extends ../../views_moltran/layouts/clean-layout
+extends ../../layouts/clean-layout
+
+//- Main content block for the home page
 block content
     .home-page
         .row
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
+                    //- Block displaying the current Ethereum block number
                     span.mini-stat-icon
                         i.ion-filing
                     .mini-stat-info.text-right
@@ -11,10 +14,11 @@ block content
                         | Blocks Mined
                     .tiles-progress
                         .m-t-20
-                            h5.text-uppercase.text-white.m-0 
+                            h5.text-uppercase.text-white.m-0
                                 span.pull-right Synced up to Block ##{block_tracker.block_number}
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
+                    //- Block displaying the total number of transactions
                     span.mini-stat-icon
                         i.ion-arrow-graph-up-right
                     .mini-stat-info.text-right
@@ -22,9 +26,22 @@ block content
                         | Transactions
                     .tiles-progress
                         .m-t-20
-                            h5.text-uppercase.text-white.m-0 
+                            h5.text-uppercase.text-white.m-0
                                 span.pull-right Total Transactions
+
+        //- New section for the transaction ID form link
         .row
+            .col-md-12
+                .panel.panel-color.panel-primary
+                    .panel-heading
+                        //- Section heading for the transaction ID form
+                        h3.panel-title Access Transaction ID Form
+                    .panel-body
+                        //- Link to navigate to the transaction ID form
+                        a.btn.btn-success(href="/transaction-id-form") Enter Transaction ID
+
+        .row
+            //- Section for displaying the last 5 blocks
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
@@ -34,18 +51,22 @@ block content
                             each block in latest_block_list
                                 panel.panel-color.panel-info
                                     .panel-body
+                                        //- Block number with hyperlink
                                         .col-md-4
                                             a(href="/block/" + block.number) #{block.number}
+                                        //- Block miner and timestamp
                                         .col-md-4
                                             p Miner: #{block.validator.name}
                                             p
                                                 span.timestamp-diff #{block.timestamp}
+                                        //- Number of transactions in the block
                                         .col-md-4
                                             if(block.number_transactions > 1)
-                                                a(href="/block/transaction/" + block.number) 
+                                                a(href="/block/transaction/" + block.number)
                                                     p #{block.number_transactions} transactions
                                             else
                                                 p #{block.number_transactions} transaction
+                                //- Hidden detailed block information
                                 .col-md-12.hide
                                     .panel.panel-color.panel-info
                                         .panel-heading
@@ -61,6 +82,7 @@ block content
                                                 else
                                                     | #{block.miner}
 
+            //- Section for displaying the latest transactions
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
@@ -70,9 +92,11 @@ block content
                             each transaction in latest_transaction_list
                                 panel.panel-color.panel-info
                                     .panel-body
+                                        //- Transaction hash with hyperlink
                                         .col-md-4.address
                                             a(href="/transaction/" + transaction.hash_lower)
                                                 span #{transaction.hash}
+                                        //- Sender and Receiver addresses
                                         .col-md-6
                                             p.address From&nbsp;
                                                 span
@@ -80,9 +104,11 @@ block content
                                             p.address To&nbsp;
                                                 span.address
                                                     a(href="/address/" + transaction.to_lower) #{transaction.to_lower}
+                                        //- Transaction value
                                         .col-md-2
                                             | #{transaction.ether_value} HABX
 
+                                //- Hidden transaction input data
                                 ul.list-group.hide
                                     li.list-group-item
                                         .row
@@ -102,7 +128,7 @@ block content
                                                 a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data
                                                 p.transaction-input #{transaction.input}
 
-
+    //- Script for handling user interaction on the page
     script.
         $(document).ready(function() {
             $(".transaction-input-header").click(function(e) {
