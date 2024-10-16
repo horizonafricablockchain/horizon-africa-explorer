@@ -1,0 +1,44 @@
+extends ../../layouts/clean-layout
+
+// Main content block for transaction form page
+block content
+    .transaction-form-page
+        // Header section for the form
+        h3 Enter Transaction ID
+        // Form for submitting the transaction ID
+        form(method='POST', action='/transaction')
+            .form-group
+                // Label and input field where user enters the transaction ID
+                label(for='transaction_id') Transaction ID
+                input#transaction_id.form-control(type='text', name='transaction_id', required)
+            // Button to submit the form
+            button.btn.btn-primary(type='submit') Submit
+
+    // Check if transaction details are available to display
+    if(transaction)
+        // Header for transaction details section
+        h4 Transaction Details
+        ul
+            // List item for transaction hash
+            li
+                strong Transaction Hash: 
+                = transaction.hash
+            // List item for block number
+            li
+                strong Block Number: 
+                = transaction.block_number
+            // List item for 'from' address
+            li
+                strong From: 
+                = transaction.from
+            // List item for 'to' address
+            li
+                strong To: 
+                = transaction.to
+            // List item for transaction value
+            li
+                strong Value: 
+                = transaction.value
+    // Notification for when transaction is not found
+    else if(transaction === null)
+        .alert.alert-warning Transaction could not be found
