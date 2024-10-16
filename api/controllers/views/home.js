@@ -8,30 +8,32 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
-        var blockTrackerList = await BlockTracker.find({
-                type: BlockTracker.constants.type.eth
-            }),
+        // Initialize variables
+        var blockTrackerList = await BlockTracker.find({ type: BlockTracker.constants.type.eth }),
             blockTracker = null,
             transactionCount = await EthTransaction.count({}),
-            latestBlockList = await EthBlock.find({}).sort("number DESC").limit(10),
-            latestTransactionList = await EthTransaction.find({}).populate("eth_block").sort("createdAt DESC").limit(10),
+            latestBlockList = [],
+            latestTransactionList = [],
             validatorList = await Validator.find(),
             findValidator = null,
             web3 = await sails.helpers.eth.getWeb3();
 
+        // Retrieve and process block tracker
         if (blockTrackerList && blockTrackerList.length > 0) {
             blockTracker = blockTrackerList[0];
         }
 
+        // Fetch latest 10 blocks sorted by createdAt
+        latestBlockList = await EthBlock.find({}).sort("createdAt DESC").limit(10);
+
+        // Fetch latest 10 transactions
+        latestTransactionList = await EthTransaction.find({}).populate("eth_block").sort("createdAt DESC").limit(10);
+
+        // Process each block to find number of transactions and validate blocks
         if (latestBlockList && latestBlockList.length > 0) {
             for (var i = 0; i < latestBlockList.length; i++) {
-                latestBlockList[i].number_transactions = await EthTransaction.count({
-                    eth_block: latestBlockList[i].id
-                });
-
-                findValidator = _.find(validatorList, {
-                    address: latestBlockList[i].miner
-                });
+                latestBlockList[i].number_transactions = await EthTransaction.count({ eth_block: latestBlockList[i].id });
+                findValidator = _.find(validatorList, { address: latestBlockList[i].miner });
 
                 if (findValidator) {
                     latestBlockList[i].validator = findValidator;
@@ -39,25 +41,12 @@ module.exports = {
             }
         }
 
-        for (var i = 0; i < latestTransactionList.length;i++) {
+        // Convert transaction values from Wei to Ether
+        for (var i = 0; i < latestTransactionList.length; i++) {
             latestTransactionList[i].ether_value = web3.utils.fromWei(latestTransactionList[i].value, "ether");
         }
 
-        // for(var i=0;i<latestTransactionList.length;i++) {
-        //     sails.log.debug("home.js (Line: 42) : latestTransactionList[i].input");//debug
-        //     sails.log.debug(latestTransactionList[i].input);//debug
-
-        //     var decoded = web3.utils.toAscii(latestTransactionList[i].input);
-        //     latestTransactionList[i].input
-
-        //     sails.log.debug("home.js (Line: 48) : decoded");//debug
-        //     // sails.log.debug(web3.utils.toAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToString(latestTransactionList[i].input));//debug
-
-        //     break;
-        // }
-
+        // Return the data to the view
         return exits.success({
             block_tracker: blockTracker,
             transaction_count: transactionCount,
