@@ -1,0 +1,17 @@
+extends ../../layouts/clean-layout
+
+//- Main content block for the transaction ID form
+block content
+  .transaction-id-form
+    //- Heading for the form
+    h2 Enter Transaction ID
+    //- Form for submitting transaction ID
+    form(action="/submit-transaction-id", method="post")
+      .form-group
+        //- Label for the transaction ID input field
+        label(for="transaction-id") Transaction ID
+        //- Input field where users enter the transaction ID
+        input#transaction-id.form-control(type="text", name="transaction_id", placeholder="Enter transaction ID here", required)
+      .form-group
+        //- Submit button for the form
+        button.btn.btn-primary(type="submit") Submit
