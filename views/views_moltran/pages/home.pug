@@ -1,7 +1,11 @@
 extends ../../views_moltran/layouts/clean-layout
+
+//- Main content block for the home page
 block content
     .home-page
         .row
+            //- Section: Block Mining Statistics
+            //- Displays the total number of blocks mined and synchronization status.
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
                     span.mini-stat-icon
@@ -13,6 +17,9 @@ block content
                         .m-t-20
                             h5.text-uppercase.text-white.m-0 
                                 span.pull-right Synced up to Block ##{block_tracker.block_number}
+
+            //- Section: Total Transactions
+            //- Displays the total number of transactions processed.
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
                     span.mini-stat-icon
@@ -24,20 +31,24 @@ block content
                         .m-t-20
                             h5.text-uppercase.text-white.m-0 
                                 span.pull-right Total Transactions
+
         .row
+            //- Section: Latest 10 Blocks
+            //- Panel displays the most recent 10 blocks with details.
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
-                        h3.panel-title Last 5 Blocks
+                        h3.panel-title Last 10 Blocks
                     .panel-body
                         .row
                             each block in latest_block_list
-                                panel.panel-color.panel-info
+                                //- Display details for each block, including number, miner, and transaction count.
+                                .panel.panel-color.panel-info
                                     .panel-body
                                         .col-md-4
                                             a(href="/block/" + block.number) #{block.number}
                                         .col-md-4
-                                            p Miner: #{block.validator.name}
+                                            p Miner: #{block.validator.name || block.miner}
                                             p
                                                 span.timestamp-diff #{block.timestamp}
                                         .col-md-4
@@ -46,6 +57,7 @@ block content
                                                     p #{block.number_transactions} transactions
                                             else
                                                 p #{block.number_transactions} transaction
+                                //- Additional hidden details for each block
                                 .col-md-12.hide
                                     .panel.panel-color.panel-info
                                         .panel-heading
@@ -57,10 +69,12 @@ block content
                                                 p #{block.number_transactions} transaction
                                             p Validator&nbsp;
                                                 if(block.validator && block.validator.name)
-                                                    a(href=block.validator.url, target="_blank") #{block.validator.name}
+                                                    a(href=block.validator.url target="_blank") #{block.validator.name}
                                                 else
                                                     | #{block.miner}
 
+            //- Section: Latest Transactions
+            //- Panel displays the most recent transactions with relevant details.
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
@@ -68,7 +82,8 @@ block content
                     .panel-body
                         .row
                             each transaction in latest_transaction_list
-                                panel.panel-color.panel-info
+                                //- Display transaction hash, sender, receiver, and value.
+                                .panel.panel-color.panel-info
                                     .panel-body
                                         .col-md-4.address
                                             a(href="/transaction/" + transaction.hash_lower)
@@ -83,6 +98,7 @@ block content
                                         .col-md-2
                                             | #{transaction.ether_value} HABX
 
+                                //- Hidden input data toggle for transaction
                                 ul.list-group.hide
                                     li.list-group-item
                                         .row
@@ -96,17 +112,17 @@ block content
                                                 p
                                                     | To&nbsp;
                                                     span.label.label-primary
-                                                        a(href="/address/" + transaction.from_lower)  #{transaction.to}
+                                                        a(href="/address/" + transaction.to_lower)  #{transaction.to}
                                                 p Block #{transaction.blockNumber}
                                             .col-md-6
-                                                a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data
+                                                a.transaction-input-header(href="#" data-transaction-id=transaction.id) Input Data
                                                 p.transaction-input #{transaction.input}
 
-
-    script.
-        $(document).ready(function() {
-            $(".transaction-input-header").click(function(e) {
-                e.preventDefault();
-                $(this).parent().find(".transaction-input").slideToggle();
-            });
+//- Script: Toggles the display of transaction input data
+script.
+    $(document).ready(function() {
+        $(".transaction-input-header").click(function(e) {
+            e.preventDefault();
+            $(this).parent().find(".transaction-input").slideToggle();
         });
+    });
