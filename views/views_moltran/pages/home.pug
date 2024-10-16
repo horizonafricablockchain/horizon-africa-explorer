@@ -1,66 +1,75 @@
 extends ../../views_moltran/layouts/clean-layout
 block content
     .home-page
+        // Row for displaying the blockchain statistics
         .row
+            // Display block mining information
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
                     span.mini-stat-icon
                         i.ion-filing
                     .mini-stat-info.text-right
-                        span.counter #{block_tracker.eth_current_block}
+                        span.counter #{block_tracker.eth_current_block} // Current block number
                         | Blocks Mined
                     .tiles-progress
                         .m-t-20
-                            h5.text-uppercase.text-white.m-0 
-                                span.pull-right Synced up to Block ##{block_tracker.block_number}
+                            h5.text-uppercase.text-white.m-0
+                                span.pull-right Synced up to Block ##{block_tracker.block_number} // Synchronization status
+            // Display transaction information
             .col-md-6.col-sm-6.col-lg-3
                 .mini-stat.clearfix.bx-shadow.bg-info
                     span.mini-stat-icon
                         i.ion-arrow-graph-up-right
                     .mini-stat-info.text-right
-                        span.counter #{transaction_count}
+                        span.counter #{transaction_count} // Total number of transactions
                         | Transactions
                     .tiles-progress
                         .m-t-20
-                            h5.text-uppercase.text-white.m-0 
-                                span.pull-right Total Transactions
+                            h5.text-uppercase.text-white.m-0
+                                span.pull-right Total Transactions // Number of transactions processed
+
+        // Row for displaying the latest blocks and transactions
         .row
+            // Column for listing the latest 10 blocks
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
-                        h3.panel-title Last 5 Blocks
+                        h3.panel-title Last 10 Blocks
                     .panel-body
                         .row
                             each block in latest_block_list
+                                // Details for each block
                                 panel.panel-color.panel-info
                                     .panel-body
                                         .col-md-4
-                                            a(href="/block/" + block.number) #{block.number}
+                                            a(href="/block/" + block.number) #{block.number} // Link to block details
                                         .col-md-4
-                                            p Miner: #{block.validator.name}
+                                            p Miner: #{block.validator.name} // Display miner information
                                             p
-                                                span.timestamp-diff #{block.timestamp}
+                                                span.timestamp-diff #{block.timestamp} // Timestamp difference
                                         .col-md-4
                                             if(block.number_transactions > 1)
-                                                a(href="/block/transaction/" + block.number) 
-                                                    p #{block.number_transactions} transactions
+                                                a(href="/block/transaction/" + block.number)
+                                                    p #{block.number_transactions} transactions // Display number of transactions
                                             else
-                                                p #{block.number_transactions} transaction
-                                .col-md-12.hide
-                                    .panel.panel-color.panel-info
-                                        .panel-heading
-                                            h3.panel-title Block Number: #{block.number}
-                                        .panel-body
-                                            if(block.number_transactions > 1)
-                                                p #{block.number_transactions} transactions
-                                            else
-                                                p #{block.number_transactions} transaction
-                                            p Validator&nbsp;
-                                                if(block.validator && block.validator.name)
-                                                    a(href=block.validator.url, target="_blank") #{block.validator.name}
-                                                else
-                                                    | #{block.miner}
+                                                p #{block.number_transactions} transaction // Display transaction information
+                // Additional hidden block details
+                .col-md-12.hide
+                    .panel.panel-color.panel-info
+                        .panel-heading
+                            h3.panel-title Block Number: #{block.number}
+                        .panel-body
+                            if(block.number_transactions > 1)
+                                p #{block.number_transactions} transactions
+                            else
+                                p #{block.number_transactions} transaction
+                            p Validator&nbsp;
+                                if(block.validator && block.validator.name)
+                                    a(href=block.validator.url, target="_blank") #{block.validator.name} // Link to validator's website
+                                else
+                                    | #{block.miner} // Display miner address
 
+            // Column for listing the latest transactions
             .col-md-6
                 .panel.panel-color.panel-primary
                     .panel-heading
@@ -68,42 +77,46 @@ block content
                     .panel-body
                         .row
                             each transaction in latest_transaction_list
+                                // Details for each transaction
                                 panel.panel-color.panel-info
                                     .panel-body
                                         .col-md-4.address
                                             a(href="/transaction/" + transaction.hash_lower)
-                                                span #{transaction.hash}
+                                                span #{transaction.hash} // Transaction hash preview
                                         .col-md-6
                                             p.address From&nbsp;
+                                                // Link to sender's address
                                                 span
                                                     a(href="/address/" + transaction.from_lower) #{transaction.from_lower}
                                             p.address To&nbsp;
+                                                // Link to receiver's address
                                                 span.address
                                                     a(href="/address/" + transaction.to_lower) #{transaction.to_lower}
                                         .col-md-2
-                                            | #{transaction.ether_value} HABX
+                                            | #{transaction.ether_value} HABX // Value of the transaction in HABX
 
+                                // Hidden detailed transaction data
                                 ul.list-group.hide
                                     li.list-group-item
                                         .row
                                             .col-md-6
                                                 p Transaction hash:&nbsp;
-                                                    span.label.label-primary #{transaction.hash}
+                                                    span.label.label-primary #{transaction.hash} // Detailed transaction hash
                                                 p
                                                     | From&nbsp;
                                                     span.label.label-primary
-                                                        a(href="/address/" + transaction.from_lower)  #{transaction.from}
+                                                    a(href="/address/" + transaction.from_lower)  #{transaction.from} // Detailed sender
                                                 p
                                                     | To&nbsp;
                                                     span.label.label-primary
-                                                        a(href="/address/" + transaction.from_lower)  #{transaction.to}
-                                                p Block #{transaction.blockNumber}
+                                                    a(href="/address/" + transaction.from_lower)  #{transaction.to} // Detailed receiver
+                                                p Block #{transaction.blockNumber} // Block number
                                             .col-md-6
-                                                a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data
-                                                p.transaction-input #{transaction.input}
-
+                                                a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data // Toggle for input data
+                                                p.transaction-input #{transaction.input} // Input data
 
     script.
+        // JQuery Script for toggling transaction input data
         $(document).ready(function() {
             $(".transaction-input-header").click(function(e) {
                 e.preventDefault();
