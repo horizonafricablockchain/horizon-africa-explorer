@@ -1,0 +1,14 @@
+extends "../../../views_moltran/layouts/clean-layout"
+
+//- Block defining the main content of the page
+block content
+    .transaction-form
+        //- Form for user to submit a transaction ID
+        form(action="/submit-transaction" method="post")
+            .form-group
+                //- Label for the transaction ID input field
+                label(for="transaction_id") Transaction ID
+                //- Input field for the transaction ID
+                input#transaction_id.form-control(type="text" name="transaction_id" required)
+            //- Submit button for the form
+            button.btn.btn-primary(type="submit") Submit
