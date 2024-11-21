@@ -1,5 +1,6 @@
 extends ../../views_moltran/layouts/clean-layout
 block content
+    link(rel='stylesheet' href='/styles/home-page.css')
     .home-page
         .row
             .col-md-6.col-sm-6.col-lg-3
@@ -102,6 +103,27 @@ block content
                                                 a.transaction-input-header(href="#", data-transaction-id=transaction.id) Input Data
                                                 p.transaction-input #{transaction.input}
 
+        // New section
+        .row
+            .col-md-12
+                .panel.panel-color.panel-primary
+                    .panel-heading
+                        h3.panel-title Last 10 Blocks
+                    .panel-body
+                        table.latest-blocks-table
+                            thead
+                                tr
+                                    th Block Number
+                                    th Miner
+                                    th Timestamp
+                                    th Transaction Count
+                            tbody
+                                each block in latest_block_list
+                                    tr
+                                        td #{block.blockNumber}
+                                        td #{block.miner}
+                                        td #{block.timestamp}
+                                        td #{block.transactionCount}
 
     script.
         $(document).ready(function() {
