@@ -1,4 +1,4 @@
-header#topnav
+header#topnav.top
     .topbar-main
         .container
             .topbar-left
@@ -9,7 +9,7 @@ header#topnav
                     li.dropdown.user-box
                         a.dropdown-toggle.waves-effect.waves-light.profile(href="", data-toggle="dropdown", aria-expanded="true")
                             span.span.hidden-xs
-                                | &nbsp;
+                                |  
                 .menu-item
                     // Mobile menu toggle
                     a.navbar-toggle
@@ -30,7 +30,10 @@ header#topnav
                         a(href="/token/list")
                             i.fa.fa-usd
                             span Tokens
-
+                    li
+                        a(href="/block/latest")
+                            i.fa.fa-cube
+                            span Latest Blocks
                 .navbar-form.navbar-right.hide(role="search")
                     .form-group
                         input(type="text" class="form-control" placeholder="Search")
