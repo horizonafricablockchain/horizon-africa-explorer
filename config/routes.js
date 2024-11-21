@@ -1,4 +1,16 @@
 module.exports.routes = {
+    // Other routes...
+
+    // Route to get transactions by block number
+    'GET /block/:block_number/transactions': { action: 'transaction/get-transactions-by-block' }
+
+    // More routes...
+};
+
+
+
+
+module.exports.routes = {
     "get /": {
         action: "views/home"
     },
@@ -42,6 +54,10 @@ module.exports.routes = {
     /* TRANSACTIONS API */
     "post /api/v1/transaction/list": {
         action: "transaction/list-transaction"
+    },
+
+    "get /block/:block_number/transactions": {
+        action: "transaction/get-transactions-by-block"
     },
 
     "post /api/v1/token-transaction/list": {
