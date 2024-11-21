@@ -5,6 +5,14 @@ module.exports = {
         address: {
             type: "string",
             required: true
+        },
+        skip: {
+            type: 'number',
+            defaultsTo: 0
+        },
+        limit: {
+            type: 'number',
+            defaultsTo: 25
         }
     },
     exits: {
@@ -20,11 +28,13 @@ module.exports = {
             }, {
                 from_lower: inputs.address.toLowerCase()
             }]
-        }).sort("blockNumber DESC");
+        }).sort("blockNumber DESC").skip(inputs.skip).limit(inputs.limit);
 
         return exits.success({
             transaction_list: transactionList,
-            address: inputs.address
+            address: inputs.address,
+            skip: inputs.skip,
+            limit: inputs.limit
         });
     }
-}
+};

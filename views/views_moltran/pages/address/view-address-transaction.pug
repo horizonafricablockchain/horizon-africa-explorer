@@ -23,4 +23,8 @@ block content
                         td.address #{transaction.to}
                         td
                             span.format-habx #{transaction.value}
-                            span &nbsp;#{sails.config.appsettings.blockchain.currency}
+        .pagination
+            if skip > 0
+                a.btn.btn-default(href=`/address/${address}?skip=${skip - limit}&limit=${limit}`) Previous
+            if transaction_list.length == limit
+                a.btn.btn-default(href=`/address/${address}?skip=${skip + limit}&limit=${limit}`) Next
