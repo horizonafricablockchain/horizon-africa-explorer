@@ -68,6 +68,10 @@ module.exports = {
         },
         transactionsRoot: {
             type: "string"
+        },
+        transactions: {
+            collection: 'EthTransaction',
+            via: 'eth_block'
         }
     }
 };
