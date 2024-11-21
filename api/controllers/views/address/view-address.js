@@ -5,6 +5,14 @@ module.exports = {
         address: {
             type: "string",
             required: true
+        },
+        page: {
+            type: 'number',
+            defaultsTo: 1
+        },
+        pageSize: {
+            type: 'number',
+            defaultsTo: 10
         }
     },
     exits: {
@@ -14,17 +22,32 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
+        var skip = (inputs.page - 1) * inputs.pageSize;
+
         var transactionList = await EthTransaction.find({
-            or: [{
-                to_lower: inputs.address.toLowerCase()
-            }, {
-                from_lower: inputs.address.toLowerCase()
-            }]
-        }).sort("blockNumber DESC");
+            or: [
+                { to_lower: inputs.address.toLowerCase() },
+                { from_lower: inputs.address.toLowerCase() }
+            ]
+        })
+        .sort("blockNumber DESC")
+        .skip(skip)
+        .limit(inputs.pageSize);
+
+        var totalTransactions = await EthTransaction.count({
+            or: [
+                { to_lower: inputs.address.toLowerCase() },
+                { from_lower: inputs.address.toLowerCase() }
+            ]
+        });
+
+        var totalPages = Math.ceil(totalTransactions / inputs.pageSize);
 
         return exits.success({
             transaction_list: transactionList,
-            address: inputs.address
+            address: inputs.address,
+            currentPage: inputs.page,
+            totalPages: totalPages
         });
     }
-}
+};
