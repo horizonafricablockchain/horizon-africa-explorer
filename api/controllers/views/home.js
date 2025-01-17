@@ -1,6 +1,6 @@
 module.exports = {
     friendlyName: "Displays home page",
-    description: "Displays home page",
+    description: "Retrieves and prepares data for the home page, including the latest blocks and transactions, and displays it using the specified view template.",
     exits: {
         success: {
             responseType: "view",
@@ -8,7 +8,7 @@ module.exports = {
         }
     },
     fn: async function(inputs, exits) {
-        var blockTrackerList = await BlockTracker.find({
+        let blockTrackerList = await BlockTracker.find({
                 type: BlockTracker.constants.type.eth
             }),
             blockTracker = null,
@@ -24,7 +24,7 @@ module.exports = {
         }
 
         if (latestBlockList && latestBlockList.length > 0) {
-            for (var i = 0; i < latestBlockList.length; i++) {
+            for (let i = 0; i < latestBlockList.length; i++) {
                 latestBlockList[i].number_transactions = await EthTransaction.count({
                     eth_block: latestBlockList[i].id
                 });
@@ -36,27 +36,16 @@ module.exports = {
                 if (findValidator) {
                     latestBlockList[i].validator = findValidator;
                 }
+
+                // Add block number and creation date to the block information
+                latestBlockList[i].block_number = latestBlockList[i].number;
+                latestBlockList[i].creation_date = latestBlockList[i].createdAt;
             }
         }
 
-        for (var i = 0; i < latestTransactionList.length;i++) {
+        for (let i = 0; i < latestTransactionList.length; i++) {
             latestTransactionList[i].ether_value = web3.utils.fromWei(latestTransactionList[i].value, "ether");
         }
-
-        // for(var i=0;i<latestTransactionList.length;i++) {
-        //     sails.log.debug("home.js (Line: 42) : latestTransactionList[i].input");//debug
-        //     sails.log.debug(latestTransactionList[i].input);//debug
-
-        //     var decoded = web3.utils.toAscii(latestTransactionList[i].input);
-        //     latestTransactionList[i].input
-
-        //     sails.log.debug("home.js (Line: 48) : decoded");//debug
-        //     // sails.log.debug(web3.utils.toAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToAscii(latestTransactionList[i].input));//debug
-        //     // sails.log.debug(web3.utils.hexToString(latestTransactionList[i].input));//debug
-
-        //     break;
-        // }
 
         return exits.success({
             block_tracker: blockTracker,
