@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Home Page
+
+  // Existing content
+
+  // New section for last 10 blocks
+  section#recent-blocks
+    h2 Recent Blocks
+    ul
+      each block in blocks
+        li
+          span Block Number: #{block.number}
+          span Created At: #{block.creationDate}
