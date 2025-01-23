@@ -1,16 +1,35 @@
 doctype html
 html
     head
+        //- Include header partial
         include ../partials/header/header.pug
     body
+        //- Declare variables
         input#txt_socket_url(type="hidden", value=sails.config.appsettings.sockets.url)
+        
+        //- Include navigation partial
         include ../partials/navigation/clean_navigation.pug
 
+        //- Navigation header with search functionality
+        nav
+            .nav-wrapper
+                form
+                    .input-field
+                        input#search(type="search", required)
+                        label(for="search") Search
+                        i.material-icons.close Search
+
+        //- Main content wrapper
         .wrapper
             .container
+                //- Block for dynamic content
                 block content
+                
+                //- Include modal partial
                 include ../partials/general/modal.pug
-                //- include ../partials/footer/footer.pug
+                
+                //- Include footer script partial
         include ../partials/footer/footer_script.pug
 
+        //- Block for footer scripts
         block footer_script
