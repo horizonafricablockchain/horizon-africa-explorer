@@ -31,10 +31,38 @@ header#topnav
                             i.fa.fa-usd
                             span Tokens
 
-                .navbar-form.navbar-right.hide(role="search")
+                .navbar-form.navbar-right(role="search")
                     .form-group
-                        input(type="text" class="form-control" placeholder="Search")
+                        input#search_input(type="text" class="form-control" placeholder="Search for transaction hash or block number")
+                        button#search_button(type="button" class="btn btn-default") Search
 
         script.
             $(document).ready(function() {
+                // Declare variables
+                var search_input = $("#search_input");
+                var search_button = $("#search_button");
+
+                // Attach click event handler to search button
+                search_button.click(function() {
+                    // Get and trim the input value
+                    var input_value = search_input.val().trim();
+
+                    // Validate input and redirect accordingly
+                    if (input_value) {
+                        // Check if input is a valid transaction hash
+                        if (/^0x([A-Fa-f0-9]{64})$/.test(input_value)) {
+                            // Redirect to transaction controller
+                            window.location.href = "/transaction/" + input_value;
+                        } 
+                        // Check if input is a valid block number
+                        else if (/^\d+$/.test(input_value)) {
+                            // Redirect to block controller
+                            window.location.href = "/block/" + input_value;
+                        } 
+                        // Handle invalid input
+                        else {
+                            alert("Invalid input. Please enter a valid transaction hash or block number.");
+                        }
+                    }
                 });
+            });

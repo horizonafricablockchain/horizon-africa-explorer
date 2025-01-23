@@ -3,16 +3,24 @@ html
     head
         include ../partials/header/header.pug
     body
+        // Hidden input for socket URL
         input#txt_socket_url(type="hidden", value=sails.config.appsettings.sockets.url)
+        
         // ======== @Region: #navigation ========
         include ../partials/navigation/logged_navigation.pug
+        // Adding search bar to navigation
+        nav
+            .search-bar
+                input(type="text", placeholder="Search...", name="search_input")
 
         .wrapper
             .container
                 // ======== @Region: #content ========
                 block content
                 include ../partials/general/modal.pug
-                //footer
+                
+                // ======== @Region: #footer ========
+                //- Uncomment the following line if footer is needed
                 //- include ../partials/footer/footer.pug
             // end container
         include ../partials/footer/footer_script.pug
