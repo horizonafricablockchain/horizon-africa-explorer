@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h1 Last 10 Blocks
+  table.table
+    thead
+      tr
+        th Block Number
+        th Miner
+        th Transactions
+        th Timestamp
+    tbody
+      each block in latest_block_list
+        tr
+          td= block.number
+          td= block.miner
+          td= block.number_transactions
+          td= block.timestamp
