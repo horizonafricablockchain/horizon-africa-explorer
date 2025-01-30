@@ -1,5 +1,3 @@
-const EthBlock = require('../../models/EthBlock');
-
 module.exports = {
     friendlyName: "Fetch latest blocks",
     description: "Fetches and prepares the last 10 blocks data",
